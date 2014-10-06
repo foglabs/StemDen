@@ -5,6 +5,8 @@ feature "Authenticated user adds a new sample", %Q{
   so I can shares it on the webs
   }  do
 
+before :each do
+end
   context "authenticated user" do
     before (:each) do
       user = FactoryGirl.create(:user)
@@ -12,17 +14,18 @@ feature "Authenticated user adds a new sample", %Q{
     end
 
     scenario "User uploads a sample" do
-
       sample = FactoryGirl.create(:sample)
-      visit new_sample_path
 
+      visit new_sample_path
+      attach_file "uploadLicense", '/uploads/'
       click_on "Submit"
+
       expect(page).to have_content "Your sample has been accepted."
     end
   end
 
 
-  scenario "unauthenticated user cannot create a matchup" do
+  scenario "unauthenticated user cannot create a new sample" do
     visit new_sample_path
 
     expect(page).to have_content "You need to sign in or sign up before continuing"
