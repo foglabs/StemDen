@@ -1,8 +1,8 @@
 require 'rails_helper'
-feature "Authenticated user adds a new sample", %Q{
+feature "Authenticated user creates a new song", %Q{
   As an user
-  I want to post a sample
-  so I can shares it on the webs
+  I want to create a song
+  so I can group my samples togeva
   }  do
 
 before :each do
