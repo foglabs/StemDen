@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20141006192303) do
 
   create_table "samples", force: true do |t|
     t.string   "name",       null: false
-    t.string   "filepath",   null: false
+    t.string   "specimen",   null: false
     t.string   "category",   null: false
     t.integer  "user_id",    null: false
     t.string   "desc"

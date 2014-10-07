@@ -2,7 +2,7 @@ class AddSamplesSongsComments < ActiveRecord::Migration
   def change
     create_table(:samples) do |t|
       t.string :name, null: false
-      t.string :filepath, null: false
+      t.string :specimen, null: false
       t.string :category, null: false
       t.integer :user_id, null: false
 

@@ -1,8 +1,19 @@
-<%= form_for @sample do |f| %>
+<%= form_for @sample, html: {multipart: true} do |f| %>
+
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %><br>
+
+  <%= f.label :category, "Category" %>
+  <%= f.text_field :category %><br>
+
   <%= f.label :desc, "Description" %>
   <%= f.text_field :desc %><br>
-  <%= f.label :sample_spawn, "Add File" %>
-  <%= f.file_field :sample_spawn %>
+
+  <%= f.label :specimen, "Add File" %>
+  <%= f.file_field :specimen %>
+  <%= f.submit "Submit" %>
 <% end %>
+
+<br>
+
+<%= link_to "Go Back", samples_path %>

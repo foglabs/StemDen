@@ -1,0 +1,27 @@
+.timeline {
+
+  border-radius: 20px;
+  height: 10px;
+  display: inline-block;
+  padding: 2px;
+  background-color: #FFAAFF;
+
+}
+
+.timelinecontainer {
+
+  display: inline-block;
+  padding: 5px;
+  background-color: #4F3F88;
+  width: 100%;
+  border-radius: 10px;
+
+}
+
+button {
+  height: 20px;
+  padding: 2px;
+  text-decoration: none;
+  border-radius: 12px;
+  background-color: #CCFFFF;
+}

@@ -1,0 +1,71 @@
+  <script type="text/javascript">
+  soundManager.setup({
+  url: '/swf',
+  onready: function() {
+    var <%= @sample.name %> = soundManager.createSound({
+      id: '<%= @sample.name %>id',
+      url: '<%= @sample.specimen_url %>',
+
+      ontimeout: function() {
+        // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+      },
+
+      whileplaying: function() {
+        $(".timeline").css('width', ((<%= @sample.name %>.position/<%= @sample.name %>.duration) * 100) + '%');
+      },
+
+      onstop: function() {
+        $(".timeline").css('width', '0%');
+      }
+
+
+    });
+
+      $("#<%= @sample.name %>playbutton").click(function()
+        {
+          <%= @sample.name %>.play();
+        });
+
+      $("#<%= @sample.name %>stopbutton").click(function()
+        {
+          <%= @sample.name %>.stop();
+        });
+
+      $("#<%= @sample.name %>seekbutton").click(function()
+        {
+
+          <%= @sample.name %>.setPosition();
+        });
+
+      $(".timelinecontainer").click(function(e){
+          console.log(e.pageX);
+      });
+
+
+  },
+
+
+
+});
+</script>
+
+
+<h1><%= @sample.name %></h1>
+<a href="<%= @sample.specimen_url %>">whoa</a>
+<br>
+<%= @sample.specimen_url %>
+<br>
+
+<button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Submit"></button>
+<button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Submit"></button>
+
+<div class="timelinecontainer">
+  <div class="timeline"></div>
+</div>
+<br>
+
+
+
+
+<%= link_to "Go Back", samples_path %>
+

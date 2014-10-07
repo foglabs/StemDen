@@ -1,10 +1,11 @@
 source 'https://rubygems.org'
-
+gem 'dotenv-rails', :groups => [:development, :test]
 
 #goodies
 gem 'devise'
 gem 'omniauth-twitter'
 gem 'carrierwave'
+gem 'fog'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
