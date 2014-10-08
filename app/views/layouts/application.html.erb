@@ -9,16 +9,16 @@
 </head>
 <body>
 <nav>
-  <%= link_to "Add Sample", new_sample_path %> |
-  <%= link_to "Create Song", new_song_path %> |
+  <div class="blob"><%= link_to "Add Sample", new_sample_path %></div>
+  <div class="blob"><%= link_to "Create Song", new_song_path %></div>
 
   <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.name %></strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <div class="blob">Logged in as <strong><%= current_user.name %></strong>.</div>
+    <div class="blob"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></div>
+    <div class="blob"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></div>
   <% else %>
-    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <div class="blob"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></div>
+    <div class="blob"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div.>
   <% end %>
 </nav>
 
@@ -30,6 +30,8 @@
   <% if alert %>
     <%= alert %>
   <% end %>
+
+  <br>
 
 <%= yield %>
 

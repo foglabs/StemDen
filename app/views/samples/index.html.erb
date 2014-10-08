@@ -1,4 +1,6 @@
 <% @samples.each do |samp| %>
-  <%= samp.user.name %> -- <%= link_to samp.name, samp %> -- <%= samp.category %><br>
+  <div class="blob">
+    <nobr><%= samp.user.name %> -- <%= link_to samp.name, samp %> -- <%= samp.category %></nobr><br>
+  </div>
 <% end %>
 

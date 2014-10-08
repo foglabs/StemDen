@@ -1,4 +1,6 @@
 <script type="text/javascript">
+
+  //initialize player + set up controls
   soundManager.setup({
   url: '/swf',
   onready: function() {
@@ -40,12 +42,12 @@
   });
 </script>
 
-
 <h1><%= @sample.name %></h1>
-<a href="<%= @sample.specimen_url %>">Download Stem</a>
+
+<a class="blob" href="<%= @sample.specimen_url %>">Download<br>Stem</a>
 <br>
-<%= @sample.specimen_url %>
 <br>
+
 <div class="playcontrols">
   <button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Play"></button>
   <button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Stop"></button>
@@ -56,5 +58,34 @@
 </div>
 
 <br>
-<%= link_to "Go Back", samples_path %>
+<br>
 
+<% @sample.comments.each do |comm| %>
+  <div class="blob">
+    <%= comm.user.name %><br>
+    <%= comm.body %>
+  </div>
+  <br>
+<% end %>
+<br>
+
+<div class="blob">
+  <%= form_for [@sample, @comment] do |f| %>
+    <%= f.label :body, "Comment:" %>
+    <%= f.text_field :body %>
+
+    <%= f.submit "Submit" %>
+
+    <% if @comment.errors.full_messages.any? %>
+      <% @comment.errors.full_messages.each do |err| %>
+        <%= err %>
+        <br>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+<br>
+<br>
+<div class="blob">
+  <%= link_to "Go Back", samples_path %>
+</div>

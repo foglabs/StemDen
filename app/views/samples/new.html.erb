@@ -1,17 +1,20 @@
-<%= form_for @sample, html: {multipart: true} do |f| %>
+<% if current_user %>
+  <%= form_for @sample, html: {multipart: true} do |f| %>
 
-  <%= f.label :name, "Name" %>
-  <%= f.text_field :name %><br>
+    <%= f.label :name, "Name" %>
+    <%= f.text_field :name %><br>
 
-  <%= f.label :category, "Category" %>
-  <%= f.text_field :category %><br>
+    <%= f.label :category, "Category" %>
+    <%= f.text_field :category %><br>
 
-  <%= f.label :desc, "Description" %>
-  <%= f.text_field :desc %><br>
+    <%= f.label :desc, "Description" %>
+    <%= f.text_field :desc %><br>
 
-  <%= f.label :specimen, "Add File" %>
-  <%= f.file_field :specimen %>
-  <%= f.submit "Submit" %>
+    <%= f.label :specimen, "Add File" %>
+    <%= f.file_field :specimen %>
+
+    <%= f.submit "Submit" %>
+  <% end %>
 <% end %>
 
 <br>
