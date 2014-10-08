@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :samples
   has_many :songs
+  has_many :comments
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

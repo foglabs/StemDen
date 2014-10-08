@@ -1,4 +1,4 @@
-  <script type="text/javascript">
+<script type="text/javascript">
   soundManager.setup({
   url: '/swf',
   onready: function() {
@@ -8,6 +8,7 @@
 
       ontimeout: function() {
         // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+        console.log('Soundmanager was unable to start! Fuck!');
       },
 
       whileplaying: function() {
@@ -17,7 +18,6 @@
       onstop: function() {
         $(".timeline").css('width', '0%');
       }
-
 
     });
 
@@ -31,41 +31,30 @@
           <%= @sample.name %>.stop();
         });
 
-      $("#<%= @sample.name %>seekbutton").click(function()
-        {
-
-          <%= @sample.name %>.setPosition();
-        });
 
       $(".timelinecontainer").click(function(e){
-          console.log(e.pageX);
+        //set song position to % position within timelinediv
+          <%= @sample.name %>.setPosition((e.pageX/$(window).width()) * <%= @sample.name %>.duration);
       });
-
-
-  },
-
-
-
-});
+    },
+  });
 </script>
 
 
 <h1><%= @sample.name %></h1>
-<a href="<%= @sample.specimen_url %>">whoa</a>
+<a href="<%= @sample.specimen_url %>">Download Stem</a>
 <br>
 <%= @sample.specimen_url %>
 <br>
-
-<button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Submit"></button>
-<button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Submit"></button>
+<div class="playcontrols">
+  <button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Play"></button>
+  <button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Stop"></button>
+</div>
 
 <div class="timelinecontainer">
   <div class="timeline"></div>
 </div>
+
 <br>
-
-
-
-
 <%= link_to "Go Back", samples_path %>
 

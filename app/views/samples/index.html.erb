@@ -1,4 +1,4 @@
 <% @samples.each do |samp| %>
-  <%= samp.user_id %> -- <%= link_to samp.name, samp %><br>
+  <%= samp.user.name %> -- <%= link_to samp.name, samp %> -- <%= samp.category %><br>
 <% end %>
 

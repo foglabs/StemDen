@@ -4,7 +4,7 @@
   height: 10px;
   display: inline-block;
   padding: 2px;
-  background-color: #FFAAFF;
+  background-color: #FFFFFF;
 
 }
 
@@ -15,6 +15,17 @@
   background-color: #4F3F88;
   width: 100%;
   border-radius: 10px;
+
+}
+
+.playcontrols {
+
+  display: inline-block;
+  padding: 5px;
+  background-color: #4F3F88;
+  border-radius: 10px;
+  width: 10%;
+
 
 }
 

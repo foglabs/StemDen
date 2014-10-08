@@ -24,6 +24,17 @@ end
 
       expect(page).to have_content "Your comment has been accepted."
     end
+
+    scenario "User fills out comment form incorrectly" do
+      sample = FactoryGirl.create(:sample)
+
+      visit samples_path
+      click_on "SampleSoGood"
+
+      click_on "Submit"
+
+      expect(page).to have_content "Body can't be blank."
+    end
   end
 
 
