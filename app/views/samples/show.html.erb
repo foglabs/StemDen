@@ -36,53 +36,69 @@
 
       $(".timelinecontainer").click(function(e){
         //set song position to % position within timelinediv
-          <%= @sample.name %>.setPosition((e.pageX/$(window).width()) * <%= @sample.name %>.duration);
+          <%= @sample.name %>.setPosition((e.pageX - $(".timelinecontainer").offset().left)/($(".timelinecontainer").width()) * <%= @sample.name %>.duration);
+          console.log(e.pageX);
       });
     },
   });
 </script>
 
-<h1><%= @sample.name %></h1>
-
-<a class="blob" href="<%= @sample.specimen_url %>">Download<br>Stem</a>
+<div class="blob">
+  <h1><%= @sample.name %></h1>
+</div>
 <br>
 <br>
 
-<div class="playcontrols">
-  <button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Play"></button>
-  <button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Stop"></button>
+<div class="yellowblobborder">
+  <a class="blob" href="<%= @sample.specimen_url %>">Download<br>Stem</a>
+</div>
+<br>
+<br>
+
+<div class="playcontrolcontainer">
+  <div class="playcontrols">
+    <button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Play"></button>
+    <button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Stop"></button>
+  </div>
 </div>
 
-<div class="timelinecontainer">
-  <div class="timeline"></div>
+<div class="tcwrapper">
+  <div class="timelinecontainer">
+    <div class="timeline"></div>
+  </div>
 </div>
 
 <br>
 <br>
 
 <% @sample.comments.each do |comm| %>
+<div class="yellowblobborder">
   <div class="blob">
-    <%= comm.user.name %><br>
+    <div class="blobborder"><%= comm.user.name %></div><br>
     <%= comm.body %>
   </div>
   <br>
+</div>
 <% end %>
 <br>
+<br>
 
-<div class="blob">
-  <%= form_for [@sample, @comment] do |f| %>
-    <%= f.label :body, "Comment:" %>
-    <%= f.text_field :body %>
+<div class="blobborder">
+  <div class="blob">
+    <%= form_for [@sample, @comment] do |f| %>
+      <%= f.label :body, "Comment:" %>
+      <%= f.text_field :body %>
 
-    <%= f.submit "Submit" %>
+      <%= f.submit "Submit" %>
 
-    <% if @comment.errors.full_messages.any? %>
-      <% @comment.errors.full_messages.each do |err| %>
-        <%= err %>
-        <br>
+      <% if @comment.errors.full_messages.any? %>
+        <% @comment.errors.full_messages.each do |err| %>
+          <%= err %>
+          <br>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
 <br>
 <br>

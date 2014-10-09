@@ -7,33 +7,57 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body>
-<nav>
-  <div class="blob"><%= link_to "Add Sample", new_sample_path %></div>
-  <div class="blob"><%= link_to "Create Song", new_song_path %></div>
+  <body>
+    <nav>
+      <div class="blobborder">
+        <div class="blob"><%= link_to "Add Sample", new_sample_path %></div>
+      </div>
+      <div class="blobborder">
+        <div class="blob"><%= link_to "Create Song", new_song_path %></div>
+      </div>
 
-  <% if user_signed_in? %>
-    <div class="blob">Logged in as <strong><%= current_user.name %></strong>.</div>
-    <div class="blob"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></div>
-    <div class="blob"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></div>
-  <% else %>
-    <div class="blob"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></div>
-    <div class="blob"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div.>
-  <% end %>
-</nav>
+      <% if user_signed_in? %>
+        <div class="blobborder">
+          <div class="blob">Logged in as <strong><%= current_user.name %></strong>.</div>
+        </div>
+        <div class="blobborder">
+          <div class="blob"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></div>
+        </div>
+        <div class="blobborder">
+          <div class="blob"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></div>
+        </div>
 
+      <% else %>
+        <div class="blobborder">
+          <div class="blob"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></div>
+        </div>
+        <div class="blobborder">
+          <div class="blob"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div>
+        </div>
+      <% end %>
+    </nav>
 
-  <% if notice %>
-    <%= notice %>
-  <% end %>
+    <div class="bigblob">
+      <div class="inblob">
 
-  <% if alert %>
-    <%= alert %>
-  <% end %>
+        <div class="blobborder">
+          <div class="blob">
+            <% if notice %>
+              <%= notice %>
+            <% end %>
 
-  <br>
+            <% if alert %>
+              <%= alert %>
+            <% end %>
+          </div>
+        </div>
 
-<%= yield %>
+        <br>
 
-</body>
+      <%= yield %>
+
+      </div>
+    </div>
+
+  </body>
 </html>

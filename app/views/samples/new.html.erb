@@ -1,22 +1,47 @@
 <% if current_user %>
   <%= form_for @sample, html: {multipart: true} do |f| %>
 
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %><br>
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name %><br>
+      </div>
+    </div>
 
-    <%= f.label :category, "Category" %>
-    <%= f.text_field :category %><br>
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :category, "Category" %>
+        <%= f.text_field :category %><br>
+    </div>
+  </div>
 
-    <%= f.label :desc, "Description" %>
-    <%= f.text_field :desc %><br>
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :desc, "Description" %>
+        <%= f.text_field :desc %><br>
+    </div>
+  </div>
 
-    <%= f.label :specimen, "Add File" %>
-    <%= f.file_field :specimen %>
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :specimen, "Add File" %>
+        <%= f.file_field :specimen %>
+    </div>
+  </div>
 
-    <%= f.submit "Submit" %>
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.submit "Submit" %>
+      </div>
+    </div>
+
   <% end %>
 <% end %>
 
 <br>
 
-<%= link_to "Go Back", samples_path %>
+<div class="blobborderline">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>
