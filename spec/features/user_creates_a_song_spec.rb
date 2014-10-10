@@ -14,16 +14,10 @@ before :each do
     end
 
     scenario "User creates a new song" do
-      samples = FactoryGirl.create_list(:sample, 10)
-
       visit new_song_path
 
       fill_in "Name", with: "Fog's Dope Song"
       fill_in "Description", with: "These beats are DOPE."
-
-      samples.each do |sample|
-        check sample
-      end
 
       click_on "Submit"
 
