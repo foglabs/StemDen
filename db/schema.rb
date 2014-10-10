@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20141010171211) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "category"
+    t.string   "desc"
   end
 
   create_table "users", force: true do |t|
