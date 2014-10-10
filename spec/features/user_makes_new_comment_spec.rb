@@ -5,8 +5,6 @@ feature "Authenticated user adds a new comment", %Q{
   so I can get my discussion on propah
   }  do
 
-before :each do
-end
   context "authenticated user" do
     before (:each) do
       user = FactoryGirl.create(:user)
@@ -36,7 +34,6 @@ end
       expect(page).to have_content "Body can't be blank"
     end
   end
-
 
   scenario "unauthenticated user cannot create a new sample" do
     visit new_sample_path

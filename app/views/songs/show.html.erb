@@ -1,0 +1,11 @@
+<h1><%= @song.name %></h1>
+
+<h2>Samples</h2>
+<ul class="samples">
+  <% @song.samples.each do |sample| %>
+    <li><%= sample.name %></li>
+  <% end %>
+</ul>
+
+<h2>Add a Sample</h2>
+<%= render partial: 'song_samples/form', locals: { song: @song } %>

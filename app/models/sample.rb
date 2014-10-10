@@ -9,6 +9,5 @@ class Sample < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :user_id, presence: true, uniqueness: true
 
-
   mount_uploader :specimen, SpecimenUploader
 end

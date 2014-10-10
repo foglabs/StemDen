@@ -1,0 +1,20 @@
+<%= form_for @song_sample do |f| %>
+  <% if @song_sample.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@song_sample.errors.count, "error") %> prohibited this sample from being saved:</h2>
+
+      <ul>
+      <% @song_sample.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :sample_id, 'Sample' %>
+  <%= f.collection_select :sample_id, Sample.all, :id, :name, include_blank: true %>
+
+  <%= f.hidden_field :song_id, value: song.id %>
+
+  <%= f.submit 'Add Sample' %>
+<% end %>

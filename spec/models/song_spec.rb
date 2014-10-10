@@ -6,10 +6,10 @@ RSpec.describe Song, model: true do
     expect(song).to be_valid
   end
 
-  it { should have_many(:song_samples)}
-  it { should have_many(:samples)}
-  it { should belong_to(:user)}
-  it {should have_valid(:name).when("Obelisk", "Port", "Rowboat")}
-  it {should_not have_valid(:name).when(nil, "")}
-
+  it { should have_many(:song_samples) }
+  it { should have_many(:samples) }
+  it { should belong_to(:user) }
+  it { should validate_presence_of(:user) }
+  it { should have_valid(:name).when("Obelisk", "Port", "Rowboat") }
+  it { should_not have_valid(:name).when(nil, "") }
 end
