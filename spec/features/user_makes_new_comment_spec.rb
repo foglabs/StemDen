@@ -33,7 +33,7 @@ end
 
       click_on "Submit"
 
-      expect(page).to have_content "Body can't be blank."
+      expect(page).to have_content "Body can't be blank"
     end
   end
 

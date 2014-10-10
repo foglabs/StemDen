@@ -1,0 +1,56 @@
+<% if current_user %>
+  <%= form_for @song do |f| %>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name %><br>
+      </div>
+    </div>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :category, "Category" %>
+        <%= f.text_field :category %><br>
+    </div>
+  </div>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :desc, "Description" %>
+        <%= f.text_field :desc %><br>
+    </div>
+  </div>
+
+
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.submit "Submit" %>
+      </div>
+    </div>
+
+
+    <div class="blobborderline">
+      <div class="blob">
+        <% if @sample.errors.full_messages.any? %>
+          <% @sample.errors.full_messages.each do |err| %>
+            <%= err %>
+            <br>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+
+
+  <% end %>
+<% end %>
+
+<br>
+
+<div class="blobborderline">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>

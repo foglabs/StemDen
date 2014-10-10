@@ -10,9 +10,8 @@ FactoryGirl.define do
 
   factory :sample do
     user
-    sequence :filename do |n|
-      "http://www.google.com/##{n}"
-    end
+    specimen { Rack::Test::UploadedFile.new(File.open(Rails.root.join('spec', 'testfile', 'sadtrombone.mp3')), 'audio/mp3') }
+
     sequence :name do |n|
       "#{n}SampleSoGood"
     end
@@ -26,4 +25,5 @@ FactoryGirl.define do
       "#{n}So good!!"
     end
   end
+
 end

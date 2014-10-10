@@ -25,7 +25,6 @@ class SamplesController < ApplicationController
     else
       flash[:notice] = "Your sample could not be accepted!"
       render "new"
-
     end
   end
 

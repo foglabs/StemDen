@@ -4,35 +4,42 @@
   <title>Stemden</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+
   <%= csrf_meta_tags %>
 
 </head>
   <body>
     <nav>
       <div class="blobborder">
-        <div class="blob"><%= link_to "Add Sample", new_sample_path %></div>
+        <div class="blob navlink"><%= link_to "All Stems", samples_path %></div>
       </div>
       <div class="blobborder">
-        <div class="blob"><%= link_to "Create Song", new_song_path %></div>
+        <div class="blob navlink"><%= link_to "Add Sample", new_sample_path %></div>
+      </div>
+      <div class="blobborder">
+        <div class="blob navlink"><%= link_to "Create Song", new_song_path %></div>
       </div>
 
       <% if user_signed_in? %>
         <div class="blobborder">
-          <div class="blob">Logged in as <strong><%= current_user.name %></strong>.</div>
+          <div class="blob navlink">Logged in as <strong><%= current_user.name %></strong>.</div>
         </div>
         <div class="blobborder">
-          <div class="blob"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></div>
+          <div class="blob navlink"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></div>
         </div>
         <div class="blobborder">
-          <div class="blob"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></div>
+          <div class="blob navlink"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></div>
         </div>
 
       <% else %>
         <div class="blobborder">
-          <div class="blob"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></div>
+          <div class="blob navlink"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></div>
         </div>
         <div class="blobborder">
-          <div class="blob"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div>
+          <div class="blob navlink"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div>
         </div>
       <% end %>
     </nav>
@@ -40,17 +47,21 @@
     <div class="bigblob">
       <div class="inblob">
 
-        <div class="blobborder">
-          <div class="blob">
-            <% if notice %>
-              <%= notice %>
-            <% end %>
-
-            <% if alert %>
-              <%= alert %>
-            <% end %>
+        <% if notice %>
+          <div class="blobborder">
+            <div class="blob">
+                <%= notice %>
+            </div>
           </div>
-        </div>
+        <% end %>
+
+        <% if alert %>
+          <div class="blobborder">
+            <div class="blob">
+              <%= alert %>
+            </div>
+          </div>
+        <% end %>
 
         <br>
 

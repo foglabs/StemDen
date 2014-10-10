@@ -1,6 +1,23 @@
+<div class="blob">
+  <div class="nameblob"><h1>Stemden :: All Samples</h1></div>
+</div>
+<br>
+<br>
+
 <% @samples.each do |samp| %>
-  <div class="blob">
-    <nobr><%= samp.user.name %> -- <%= link_to samp.name, samp %> -- <%= samp.category %></nobr><br>
+  <div class="blobborder">
+    <div class="blob">
+      <div class="nameblob"><%= samp.user.name %></div> --
+
+        <%= link_to samp do %>
+          <span class="indexblob">
+           <%= samp.name %>
+          </span>
+        <% end %>
+        <h5>-- [<%= samp.category %>]</h5>
+    </div>
   </div>
+  <br>
+  <br>
 <% end %>
 
