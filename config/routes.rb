@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   resources :songs
 
+  resources :song_samples, only: [:create]
+
   root to: "samples#index"
 end

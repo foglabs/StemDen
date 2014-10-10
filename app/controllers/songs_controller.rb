@@ -16,8 +16,13 @@ class SongsController < ApplicationController
       redirect_to song_path(@song), notice: "Your song has been accepted."
     else
       flash[:notice] = "Your song could not be accepted!"
-      render "index"
+      render 'new'
     end
+  end
+
+  def show
+    @song = Song.find(params[:id])
+    @song_sample = SongSample.new
   end
 
   private
