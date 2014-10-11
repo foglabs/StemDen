@@ -8,29 +8,9 @@
   url: '/swf',
   onready: function() {
 
-    this.audioFormats = {
-    mp3: {
-      'type': ['audio/mpeg; codecs="mp3"', 'audio/mpeg', 'audio/mp3'],
-      'required': true
-    },
-    wav: {
-      'type': ['audio/wav; codecs="1"', 'audio/wav'],
-      'required': true
-    },
-    aiff: {
-      'type': ['audio/aiff; codecs="1"', 'audio/aiff'],
-      'required': true
-    }
-  };
-
-
     var <%= @sample.name %> = soundManager.createSound({
       id: '<%= @sample.name %>id',
       url: '<%= @sample.specimen_url %>',
-
-
-
-
 
       ontimeout: function() {
         // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
