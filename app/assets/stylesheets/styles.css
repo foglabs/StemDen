@@ -2,18 +2,14 @@ body {
   background-color: #002401;
   color: #FFFFFF;
   font-family: 'Dosis';
-
-
 }
 
 h1 {
-font-family: 'Philosopher';
-
+  font-family: 'Philosopher';
 }
 
 .navlink {
   font-family: "Philosopher";
-
 }
 
 /* player stuff */
@@ -37,9 +33,7 @@ font-family: 'Philosopher';
 .tcwrapper {
   padding: 0.28%;
   border-radius: 34px;
-
   background-color: #A2FFA2;
-
 }
 
 .playcontrolcontainer {
@@ -54,8 +48,6 @@ font-family: 'Philosopher';
   border-radius: 10px;
   white-space: nowrap;
   box-shadow: 0px 0px 32px #003422;
-
-
 }
 
 .playcontrols {
@@ -72,16 +64,20 @@ font-family: 'Philosopher';
 /* index stuff */
 
 h5 {
-  display: inline;
   font-size: 9px;
   white-space: nowrap;
-
+  display: inline;
 }
 
 .indexblob {
   background-color: #AA1045;
   padding: 3.05%;
   display: inline-block;
+}
+
+ul.samples {
+  list-style: none;
+  padding: 6px;
 }
 
 /* general block stuff */
@@ -101,7 +97,6 @@ h5 {
   padding: 0.35%;
 }
 
-
 .yellowblobborder
 {
   box-shadow: 0px 0px 12px #003422;
@@ -118,6 +113,7 @@ h5 {
   display: inline-block;
   text-align: center;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 
 /* comments stuff */
@@ -128,11 +124,9 @@ h5 {
   padding: 5px;
   margin-bottom: 5px;
   display: inline-block;
-
 }
 
 h6 {
-
   display: inline;
   font-size: 7px;
 }
@@ -141,7 +135,6 @@ h6 {
   background-color: #117511;
   height: 1px;
   text-align: middle;
-
 }
 
 .commborder
@@ -162,7 +155,6 @@ h6 {
 
 .commform {
   padding: 5px;
-
 }
 
 /* overall layout stuff */
@@ -177,7 +169,6 @@ padding: 0.05%;
 }
 
 .inblob {
-
 background-color: #002200;
 margin: 2px;
 padding: 5%;
@@ -204,8 +195,6 @@ a:hover {
 a:active {
   color: #89DD10;
 }
-
-
 
 p {
   color: #FFFFFF;

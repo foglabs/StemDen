@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Stemden</title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 
   <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
@@ -14,11 +14,17 @@
   <body>
     <nav>
       <div class="blobborder">
-        <div class="blob navlink"><%= link_to "All Stems", samples_path %></div>
+        <div class="blob navlink"><%= link_to "Add Stem", new_sample_path %></div>
       </div>
+
       <div class="blobborder">
-        <div class="blob navlink"><%= link_to "Add Sample", new_sample_path %></div>
+        <div class="blob navlink"><%= link_to "Stems", samples_path %></div>
       </div>
+
+      <div class="blobborder">
+        <div class="blob navlink"><%= link_to "Songs", songs_path %></div>
+      </div>
+
       <div class="blobborder">
         <div class="blob navlink"><%= link_to "Create Song", new_song_path %></div>
       </div>
@@ -46,6 +52,9 @@
 
     <div class="bigblob">
       <div class="inblob">
+        <%= yield %>
+
+          <br>
 
         <% if notice %>
           <div class="blobborder">
@@ -53,6 +62,7 @@
                 <%= notice %>
             </div>
           </div>
+          <br>
         <% end %>
 
         <% if alert %>
@@ -61,14 +71,9 @@
               <%= alert %>
             </div>
           </div>
+          <br>
         <% end %>
-
-        <br>
-
-      <%= yield %>
-
       </div>
     </div>
-
   </body>
 </html>

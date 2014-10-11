@@ -1,11 +1,37 @@
-<h1><%= @song.name %></h1>
 
-<h2>Samples</h2>
-<ul class="samples">
-  <% @song.samples.each do |sample| %>
-    <li><%= sample.name %></li>
-  <% end %>
-</ul>
+<div class="blob">
+  <div class="nameblob">
+    <h1><%= @song.name %> :: Stems</h1>
+  </div>
+</div>
 
-<h2>Add a Sample</h2>
-<%= render partial: 'song_samples/form', locals: { song: @song } %>
+<br>
+<br>
+<div class="blobborder">
+  <div class="blob">
+    <ul class="samples">
+      <% @song.song_samples.each do |song_sample| %>
+        <div class="nameblob"><li><%= link_to "#{song_sample.sample.name} -- #{song_sample.sample.user.name}", song_sample.sample %><h5> -- Added By <%= link_to song_sample.user.name, song_sample.user %></h5></li></div><br>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <div class="nameblob"><h3>Add a Stem</h3></div>
+    <%= render partial: 'song_samples/form', locals: { song: @song } %>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", songs_path %>
+  </div>
+</div>

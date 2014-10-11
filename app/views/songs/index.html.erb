@@ -1,0 +1,24 @@
+<div class="blob">
+  <div class="nameblob"><h1>Stemden :: All Songs</h1></div>
+</div>
+<br>
+<br>
+
+<% @songs.each do |song| %>
+  <div class="blobborder">
+    <div class="blob">
+      <div class="nameblob"><%= song.user.name %></div> --
+
+        <%= link_to song do %>
+          <span class="indexblob">
+           <%= song.name %>
+          </span>
+        <% end %>
+        <br>
+        <div class="timestampback"><h5>[<%= song.created_at.to_s(:short) %>] -- [<%= song.category %>]</h5></div>
+    </div>
+  </div>
+  <br>
+  <br>
+<% end %>
+

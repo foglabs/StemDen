@@ -1,6 +1,7 @@
 class SongSamplesController < ApplicationController
   def create
     @song_sample = SongSample.new(song_sample_params)
+    @song_sample.user = current_user
 
     if @song_sample.save
       flash[:notice] = 'Sample added'
@@ -14,6 +15,6 @@ class SongSamplesController < ApplicationController
 
   private
     def song_sample_params
-      params.require(:song_sample).permit(:sample_id, :song_id)
+      params.require(:song_sample).permit(:sample_id, :song_id, :user_id)
     end
 end

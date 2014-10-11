@@ -1,0 +1,45 @@
+<div class="blob">
+  <div class="nameblob">
+    <h1><%= @user.name %> :: Profile</h1>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="blob">
+  <div class="nameblob">
+    <h2>All Stems</h2>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+      <% @user.samples.each do |samp| %>
+        <%= link_to samp.name, samp %> -- <h6><%= samp.created_at.to_s(:short) %></h6><br>
+      <% end %>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="blob">
+  <div class="nameblob">
+    <h2>All Songs</h2>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+      <% @user.songs.each do |song| %>
+        <%= link_to song.name, song %> -- <h6><%= song.created_at.to_s(:short) %></h6><br>
+      <% end %>
+  </div>
+</div>
+

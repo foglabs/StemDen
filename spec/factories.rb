@@ -21,6 +21,11 @@ FactoryGirl.define do
     category "Dope"
   end
 
+  factory :song_sample do
+    user
+    sample
+    song
+  end
   factory :comment do
     user
     sample

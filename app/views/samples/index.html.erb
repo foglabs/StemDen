@@ -14,7 +14,8 @@
            <%= samp.name %>
           </span>
         <% end %>
-        <h5>-- [<%= samp.category %>]</h5>
+        <br>
+        <div class="timestampback"><h5>[<%= samp.created_at.to_s(:short) %>] -- [<%= samp.category %>]</h5></div>
     </div>
   </div>
   <br>
