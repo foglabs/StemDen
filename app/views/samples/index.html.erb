@@ -7,7 +7,7 @@
 <% @samples.each do |samp| %>
   <div class="blobborder">
     <div class="blob">
-      <div class="nameblob"><%= samp.user.name %></div> --
+      <div class="nameblob"><%= link_to samp.user.name, samp.user %></div> --
 
         <%= link_to samp do %>
           <span class="indexblob">
