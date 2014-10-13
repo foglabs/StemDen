@@ -1,4 +1,12 @@
-<h1><%= @topic.name %></h1>
+<div class="blob">
+  <div class="nameblob">
+    <h1><%= @topic.name %></h1>
+  </div>
+</div>
+<br>
+<br>
+
+
 
 <% lastuser = "" %>
 <% counter = 0 %>
@@ -19,11 +27,14 @@
     <% end %>
         <div class="blob">
             <div class="nameblob"><%= comm.user.name %></div><br>
-            <%= comm.body %><br>
+              <%= comm.body %><br>
             <div class="timestampback"><h6><%= comm.created_at.to_s(:short) %></h6></div>
         </div>
         <br>
       </div>
+      <% if comm.user == current_user %>
+        <%= link_to "Delete", topic_comment_path(@topic, comm), method: :delete %>
+      <% end %>
 
     <% lastuser = comm.user.name %>
   <% end %>
@@ -52,4 +63,10 @@
 </div>
 <br>
 <br>
-
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>
+<br>
+<br>

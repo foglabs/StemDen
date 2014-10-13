@@ -1,7 +1,8 @@
 
 <div class="blob">
   <div class="nameblob">
-    <h1><%= @song.name %> :: Stems</h1>
+
+    <h1>Song :: <span class="indexblob"><%= @song.name %></span></h1>
   </div>
 </div>
 
@@ -11,7 +12,7 @@
   <div class="blob">
     <ul class="samples">
       <% @song.song_samples.each do |song_sample| %>
-        <div class="nameblob"><li><%= link_to "#{song_sample.sample.name} -- #{song_sample.sample.user.name}", song_sample.sample %><h5> -- Added By <%= link_to song_sample.user.name, song_sample.user %></h5></li></div><br>
+        <div class="nameblob"><li><%= link_to "#{song_sample.sample.name}", song_sample.sample %> -- <%= link_to "#{song_sample.sample.user.name}", song_sample.sample.user %><h5> -- Added By <%= link_to song_sample.user.name, song_sample.user %></h5></li></div><br>
       <% end %>
     </ul>
   </div>
@@ -35,3 +36,5 @@
     <%= link_to "Go Back", songs_path %>
   </div>
 </div>
+<br>
+<br>

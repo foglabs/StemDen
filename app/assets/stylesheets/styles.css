@@ -2,16 +2,18 @@ body {
   background-color: #002401;
   color: #FFFFFF;
   font-family: 'Dosis';
+
 }
 
 h1 {
   font-family: 'Philosopher';
+  display: inline;
 }
 
 h2
 {
   font-family: 'Philosopher';
-  font-size: 10px;
+  font-size: 18px;
 }
 
 .navlink {
@@ -68,6 +70,16 @@ h2
 }
 
 /* index stuff */
+
+.stemtitle {
+  height: 12px;
+}
+
+.stemtitle h1 {
+  height: 4px;
+}
+
+
 
 h5 {
   font-size: 9px;
@@ -164,46 +176,65 @@ h6 {
 }
 
 .disctitle {
-  margin-left: 33%;
-  margin-right: 50%;
+  overflow: auto;
 
+}
+
+.disctimestamp
+{
+  height: 14px;
+
+}
+
+.tinyblob {
+  font-size: 8px;
+  padding: 0.08%;
+  background-color: #FF0000;
 }
 
 /* overall layout stuff */
 
 .bigblob {
+  margin: 8%;
+  border-radius: 9px;
+  box-shadow: 0px 0px 250px #007200;
+  background-color: #AA1045;
+  padding: 0.05%;
+  height: 100%;
 
-margin: 8%;
-border-radius: 9px;
-box-shadow: 0px 0px 250px #007200;
-background-color: #AA1045;
-padding: 0.05%;
 }
 
 .inblob {
-background-color: #002200;
-margin: 2px;
-padding: 5%;
+  background-color: #002200;
+  margin: 2px;
+  padding: 5%;
+
 }
 
 .cellblob1 {
-
-background-color: #222200;
-padding: 1%;
-display: inline-block;
-width: 39%;
-float:left;
-
+  background-color: #012208;
+  padding: 1.8%;
+  display: inline-block;
+  width: 45%;
+  overflow: auto;
 
 }
 .cellblob2 {
+  background-color: #012206;
+  padding: 1.8%;
+  display: inline-block;
+  width: 45%;
+  float:right;
+  overflow: auto;
 
-background-color: #222200;
-padding: 1%;
-display: inline-block;
-width: 39%;
+}
 
-float:right;
+.cellblob3 {
+  background-color: #012206;
+  padding: 1.8%;
+  display: inline-block;
+  width: 90%;
+  overflow: auto;
 
 }
 

@@ -7,7 +7,7 @@
 <% @songs.each do |song| %>
   <div class="blobborder">
     <div class="blob">
-      <div class="nameblob"><%= song.user.name %></div> --
+      <div class="nameblob"><%= link_to song.user.name, song.user %></div> --
 
         <%= link_to song do %>
           <span class="indexblob">
@@ -22,3 +22,11 @@
   <br>
 <% end %>
 
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>

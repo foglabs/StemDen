@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :samples
   has_many :songs
-  has_many :comments
+  has_many :comments, dependent: :destroy
+  has_many :topics, dependent: :destroy
 
   validates :name, presence: true
 

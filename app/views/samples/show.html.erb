@@ -93,10 +93,18 @@
       <div class="blob">
           <div class="nameblob"><%= comm.user.name %></div><br>
           <%= comm.body %><br>
-          <div class="timestampback"><h6><%= comm.created_at.to_s(:short) %></h6></div>
+          <div class="timestampback"><h6><%= comm.created_at.to_s(:short) %></h6>
+
+            <% if comm.user == current_user %>
+              <div class="tinyblob"><%= link_to "Delete", sample_comment_path(@sample, comm), method: :delete %></div>
+            <% end %>
+
+          </div>
       </div>
       <br>
     </div>
+
+
 
   <% lastuser = comm.user.name %>
 <% end %>
@@ -125,6 +133,8 @@
 </div>
 <br>
 <br>
-<div class="blob">
-  <%= link_to "Go Back", samples_path %>
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
 </div>

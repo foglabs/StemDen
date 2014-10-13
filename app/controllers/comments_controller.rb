@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :authorize_user!, except: [:index, :new, :show, :create]
+  before_filter :authorize_user!, except: [:index, :new, :show, :create, :destroy]
 
   def index
     @comments = Comment.all
@@ -42,6 +42,15 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+
+    @comment.destroy
+
+    if @comment.sample_id
+      redirect_to sample_path(@comment.sample)
+    elsif @comment.topic_id
+      redirect_to topic_path(@comment.topic)
+    end
   end
 
   private

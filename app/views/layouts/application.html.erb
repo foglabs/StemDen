@@ -13,21 +13,22 @@
 </head>
   <body>
     <nav>
+
+    <div class="blob">
+      <div class="nameblob"><h1><%= link_to ":: Stemden ::", samples_path %></h1></div>
+    </div>
       <div class="blobborder">
         <div class="blob navlink"><%= link_to "Add Stem", new_sample_path %></div>
       </div>
 
       <div class="blobborder">
-        <div class="blob navlink"><%= link_to "Stems", samples_path %></div>
-      </div>
-
-      <div class="blobborder">
-        <div class="blob navlink"><%= link_to "Songs", songs_path %></div>
-      </div>
-
-      <div class="blobborder">
         <div class="blob navlink"><%= link_to "Create Song", new_song_path %></div>
       </div>
+
+      <div class="blobborder">
+        <div class="blob navlink"><%= link_to "All Songs", songs_path %></div>
+      </div>
+
 
       <% if user_signed_in? %>
         <div class="blobborder">
@@ -52,13 +53,8 @@
 
     <div class="bigblob">
       <div class="inblob">
-        <%= yield %>
 
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
+        <%= yield %>
 
         <% if notice %>
           <div class="blobborder">
@@ -77,6 +73,7 @@
           </div>
           <br>
         <% end %>
+
       </div>
     </div>
   </body>

@@ -15,6 +15,11 @@ FactoryGirl.define do
     sequence(:description){|n| "#{n}So good!!"}
   end
 
+  factory :topic do
+    user
+    name "Here's something to consider"
+  end
+
   factory :song do
     user
     sequence(:name){ |n| "Excellent Song#{n}"}
@@ -26,9 +31,12 @@ FactoryGirl.define do
     sample
     song
   end
+
   factory :comment do
     user
     sample
     body "This is a darn great sample."
   end
+
+
 end
