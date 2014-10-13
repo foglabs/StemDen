@@ -1,6 +1,6 @@
 class SamplesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :authorize_user!, except: [:index, :new, :show, :create]
+  before_filter :authorize_user!, except: [:index, :new, :show, :create, :destroy]
 
   def index
     @samples = Sample.all
@@ -27,6 +27,13 @@ class SamplesController < ApplicationController
       flash[:notice] = "Your sample could not be accepted!"
       render "new"
     end
+  end
+
+  def destroy
+    @sample = Sample.find(params[:id])
+
+    @sample.destroy
+    redirect_to samples_path
   end
 
   private

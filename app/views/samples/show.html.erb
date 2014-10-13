@@ -2,8 +2,6 @@
 
   //initialize player + set up controls
 
-
-
   soundManager.setup({
   url: '/swf',
   onready: function() {
@@ -56,6 +54,15 @@
 <div class="yellowblobborder">
   <a class="blob" href="<%= @sample.specimen_url %>">Download<br>Stem</a>
 </div>
+
+<% if @sample.user == current_user %>
+  <div class="yellowblobborder">
+
+    <div class="blob"><%= link_to "Delete Stem", sample_path(@sample), method: :delete %></div>
+  </div>
+
+<% end %>
+
 <br>
 <br>
 
@@ -117,7 +124,7 @@
     <div class="commform">
     <%= form_for [@sample, @comment] do |f| %>
       <%= f.label :body, "Comment:" %>
-      <%= f.text_field :body %>
+      <%= f.text_field :body, autofocus: true %>
 
       <%= f.submit "Submit" %>
 
@@ -138,3 +145,6 @@
     <%= link_to "Go Back", samples_path %>
   </div>
 </div>
+
+<br>
+<br>

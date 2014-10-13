@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :authorize_user!, except: [:index, :new, :show, :create]
+  before_filter :authorize_user!, except: [:index, :new, :show, :create, :destroy]
 
   def show
     @topic = Topic.find(params[:id])
@@ -15,12 +15,19 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user = current_user
 
-if @topic.save
+    if @topic.save
       redirect_to topic_path(@topic), notice: "Your topic has been accepted."
     else
       flash[:notice] = "Your topic could not be accepted!"
       render "new"
     end
+  end
+
+  def destroy
+    @topic = Topic.find(params[:id])
+
+    @topic.destroy
+    redirect_to samples_path
   end
 
   private

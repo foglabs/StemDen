@@ -3,9 +3,18 @@
     <h1><%= @topic.name %></h1>
   </div>
 </div>
-<br>
+
+
+<% if @topic.user == current_user %>
+  <div class="yellowblobborder">
+    <div class="blob"><div class="tinyblob"><%= link_to "Delete Topic", topic_path(@topic), method: :delete %></div></div>
+  </div>
+
+  <br>
 <br>
 
+
+<% end %>
 
 
 <% lastuser = "" %>
@@ -29,12 +38,13 @@
             <div class="nameblob"><%= comm.user.name %></div><br>
               <%= comm.body %><br>
             <div class="timestampback"><h6><%= comm.created_at.to_s(:short) %></h6></div>
+
+            <% if comm.user == current_user %>
+              <div class="tinyblob"><%= link_to "Delete", topic_comment_path(@topic, comm), method: :delete %></div>
+            <% end %>
         </div>
         <br>
       </div>
-      <% if comm.user == current_user %>
-        <%= link_to "Delete", topic_comment_path(@topic, comm), method: :delete %>
-      <% end %>
 
     <% lastuser = comm.user.name %>
   <% end %>
@@ -47,7 +57,7 @@
     <div class="commform">
     <%= form_for [@topic, @comment] do |f| %>
       <%= f.label :body, "Comment:" %>
-      <%= f.text_field :body %>
+      <%= f.text_field :body, autofocus: true %>
 
       <%= f.submit "Submit" %>
 
