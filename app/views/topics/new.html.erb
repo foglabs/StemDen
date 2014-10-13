@@ -1,0 +1,19 @@
+<div class="blobborder">
+  <div class="blob">
+    <div class="commform">
+    <%= form_for @topic do |f| %>
+      <%= f.label :name, "Topic:" %>
+      <%= f.text_field :name %>
+
+      <%= f.submit "Submit" %>
+
+      <% if @topic.errors.full_messages.any? %>
+        <% @topic.errors.full_messages.each do |err| %>
+          <%= err %>
+          <br>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>

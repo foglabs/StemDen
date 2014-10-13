@@ -1,8 +1,15 @@
 <div class="blob">
   <div class="nameblob"><h1>Stemden :: All Samples</h1></div>
 </div>
+
+
+
+  <br>
 <br>
-<br>
+
+
+<div class="cellblob1">
+
 
 <% @samples.each do |samp| %>
   <div class="blobborder">
@@ -18,6 +25,33 @@
         <div class="timestampback"><h5>[<%= samp.created_at.to_s(:short) %>] -- [<%= samp.category %>]</h5></div>
     </div>
   </div>
+
+</div>
+
+<div class="cellblob2">
+
+  <div class="blobborder disctitle">
+    <div class="blob">
+      <h2>:: Discussion ::</h2>
+      <div class="timestampback">
+        <h5>oooo</h5>
+      </div>
+    </div>
+  </div>
+
+
+  <% @topics.each do |topic| %>
+    <div class="blob">
+      <div class="nameblob"><%= topic.user.name %></div><br>
+        <%= link_to topic.name, topic %><br>
+      <div class="timestampback"><h6><%= topic.created_at.to_s(:short) %></h6></div>
+    </div>
+  <% end %>
+  <br>
+  <br>
+  <%= link_to "Add A Topic", new_topic_path %>
+</div>
+
   <br>
   <br>
 <% end %>

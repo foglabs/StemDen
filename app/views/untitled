@@ -1,0 +1,52 @@
+<h1><%= @topic.name %></h1>
+
+<% lastuser = "" %>
+<% counter = 0 %>
+
+<% @topic.comments.each do |comm| %>
+  <% if comm.user.name != lastuser && lastuser != ""  %>
+    <br>
+    <br>
+    <% counter += 1 %>
+  <% end %>
+
+  <% if counter % 2 == 0 %>
+    <div class="yellowblobborder">
+  <% else %>
+    <div class="commborder2">
+  <% end %>
+      <div class="blob">
+          <div class="nameblob"><%= comm.user.name %></div><br>
+          <%= comm.body %><br>
+          <div class="timestampback"><h6><%= comm.created_at.to_s(:short) %></h6></div>
+      </div>
+      <br>
+    </div>
+
+  <% lastuser = comm.user.name %>
+<% end %>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <div class="commform">
+    <%= form_for [@topic, @comment] do |f| %>
+      <%= f.label :body, "Comment:" %>
+      <%= f.text_field :body %>
+
+      <%= f.submit "Submit" %>
+
+      <% if @comment.errors.full_messages.any? %>
+        <% @comment.errors.full_messages.each do |err| %>
+          <%= err %>
+          <br>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
+<br>
+<br>

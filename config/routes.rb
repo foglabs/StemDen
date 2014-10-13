@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create, :destroy]
   end
 
+  resources :topics do
+    resources :comments, only: [:new, :create, :destroy]
+  end
+
   resources :songs
 
   resources :song_samples, only: [:create]

@@ -4,6 +4,7 @@ class SamplesController < ApplicationController
 
   def index
     @samples = Sample.all
+    @topics = Topic.all
   end
 
   def show

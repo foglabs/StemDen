@@ -17,14 +17,27 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
-    @sample = Sample.find(params[:sample_id])
-    @comment.sample = @sample
 
-    if @comment.save
-      redirect_to sample_path(@sample), notice: "Your comment has been accepted."
-    else
-      flash[:notice] = "Your comment could not be accepted!"
-      render "samples/show"
+    if params[:sample_id]
+      @sample = Sample.find(params[:sample_id])
+      @comment.sample = @sample
+
+      if @comment.save
+        redirect_to sample_path(@sample), notice: "Your comment has been accepted."
+      else
+        flash[:notice] = "Your comment could not be accepted!"
+        render "samples/show"
+      end
+    elsif params[:topic_id]
+      @topic = Topic.find(params[:topic_id])
+      @comment.topic = @topic
+
+      if @comment.save
+        redirect_to topic_path(@topic), notice: "Your comment has been accepted."
+      else
+        flash[:notice] = "Your comment could not be accepted!"
+        render "topics/show"
+      end
     end
   end
 
@@ -33,7 +46,7 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:body, :user_id, :sample_id)
+      params.require(:comment).permit(:body, :user_id, :sample_id, :topic_id)
     end
 
   def authorize_user
