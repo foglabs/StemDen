@@ -5,6 +5,7 @@ class SamplesController < ApplicationController
   def index
     @samples = Sample.all
     @topics = Topic.all
+    @news = Topic.get_news
   end
 
   def show
@@ -20,6 +21,7 @@ class SamplesController < ApplicationController
   def create
     @sample = Sample.new(sample_params)
     @sample.user = current_user
+    @sample.name = @sample.name.gsub(/\s+/, "")
 
     if @sample.save
       redirect_to samples_path, notice: "Your sample has been accepted."
@@ -38,6 +40,6 @@ class SamplesController < ApplicationController
 
   private
     def sample_params
-      params.require(:sample).permit(:name, :length, :category, :desc, :specimen)
+      params.require(:sample).permit(:name, :length, :category, :description, :specimen)
     end
 end

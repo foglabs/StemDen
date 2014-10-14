@@ -29,7 +29,6 @@
         <div class="blob navlink"><%= link_to "All Songs", songs_path %></div>
       </div>
 
-
       <% if user_signed_in? %>
         <div class="blobborder">
           <div class="blob navlink">Logged in as <strong><%= current_user.name %></strong>.</div>
@@ -75,6 +74,26 @@
         <% end %>
 
       </div>
+    </div>
+
+    <div class="updatecontainer">
+
+      <div class="update">
+         <div class="timestampback">
+          </div>
+        <div class="nameblob"><h2>: Announcements :</h2>
+
+          <ul>
+            <% @news.each do |item| %>
+              <li><%= link_to item.name, item %></li>
+            <% end %>
+          </ul>
+
+          <div class="timestampback">
+          </div>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>

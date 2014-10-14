@@ -4,4 +4,9 @@ class Topic < ActiveRecord::Base
 
   validates :name, presence: true
   validates :user, presence: true
+
+  def get_news
+    news = Topic.where(type: 'news')
+  end
+
 end
