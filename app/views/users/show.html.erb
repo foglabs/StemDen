@@ -53,7 +53,7 @@
 <br>
 <br>
 
-<div class="cellblob3">
+<div class="cellblob1">
 
   <div class="blob">
     <div class="nameblob">
@@ -81,6 +81,42 @@
 <br>
 
 </div>
+
+<div class="cellblob2">
+
+  <% if current_user && current_user.admin? %>
+
+    <div class="blob">
+      <div class="nameblob">
+        <h2>Post News</h2>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="blobborder">
+      <div class="blob">
+        <div class="commform">
+          <%= form_for @topic do |f| %>
+            <%= f.label :name, "News:" %>
+            <%= f.text_field :name, autofocus: true %>
+
+            <%= f.submit "Submit" %>
+
+            <% if @topic.errors.full_messages.any? %>
+              <% @topic.errors.full_messages.each do |err| %>
+                <%= err %>
+                <br>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
 
 <br>
 <br>

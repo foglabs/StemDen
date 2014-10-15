@@ -1,0 +1,81 @@
+
+<% @users.each do |user| %>
+
+  <h1><%= user.name %></h1>
+  <br>
+
+  <div class="cellblob1">
+    <h2>Songs</h2>
+
+    <% user.songs.each do |song| %>
+      <%= link_to song.name, song %><h5> by <%= song.user.name %></h5><br>
+      <div class="tinyblob"><%= link_to "Delete", song_path(song), method: :delete %></div><br>
+    <% end %>
+
+  </div>
+
+  <div class="cellblob2">
+    <h2>Samples</h2>
+
+    <% user.samples.each do |sample| %>
+      <%= link_to sample.name, sample %><h5> by <%= sample.user.name %></h5><br>
+      <div class="tinyblob"><%= link_to "Delete", sample_path(sample), method: :delete %></div><br>
+
+    <% end %>
+  </div>
+
+  <div class="cellblob1">
+    <h2>Comments</h2>
+
+
+    <% user.comments.each do |comment| %>
+      <%= comment.body %><h5> by <%= comment.user.name %></h5><br>
+    <% end %>
+  </div>
+
+  <div class="cellblob2">
+    <h2>News</h2>
+
+
+    <% user.comments.each do |comment| %>
+      <%= comment.body %><h5> by <%= comment.user.name %></h5><br>
+    <% end %>
+  </div>
+
+
+<div class="cellblob1">
+
+  <% if current_user && current_user.admin? %>
+
+    <div class="blob">
+      <div class="nameblob">
+        <h2>Post News</h2>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="blobborder">
+      <div class="blob">
+        <div class="commform">
+          <%= form_for @topic do |f| %>
+            <%= f.label :name, "News:" %>
+            <%= f.text_field :name, autofocus: true %>
+
+            <%= f.submit "Submit" %>
+
+            <% if @topic.errors.full_messages.any? %>
+              <% @topic.errors.full_messages.each do |err| %>
+                <%= err %>
+                <br>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% end %>

@@ -34,4 +34,10 @@ class TopicsController < ApplicationController
     def topic_params
       params.require(:topic).permit(:name, :comment_id)
     end
+
+    def authorize_user
+      unless user_signed_in? && current_user.admin?
+        raise ActionController::RoutingError.new("Not Found")
+      end
+    end
 end

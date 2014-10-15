@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:show]
+  resources :users do
+    member do
+      get 'dashboard'
+    end
+  end
 
   resources :samples do
     resources :comments, only: [:new, :create, :destroy]

@@ -84,7 +84,7 @@
         <div class="nameblob"><h2>: Announcements :</h2>
 
           <ul>
-            <% @news.each do |item| %>
+            <% Topic.get_news.each do |item| %>
               <li><%= link_to item.name, item %></li>
             <% end %>
           </ul>
