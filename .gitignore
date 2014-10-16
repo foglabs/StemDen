@@ -18,3 +18,4 @@
 .env
 /public/uploads/tmp
 note
+.elasticbeanstalk/
