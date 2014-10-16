@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get 'dashboard'
+      get '/dashboard' => 'users#dashboard'
     end
   end
 
