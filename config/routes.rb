@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
+
   resources :users do
-    member do
+    collection do
       get 'dashboard'
     end
   end
