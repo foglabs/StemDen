@@ -9,7 +9,7 @@
 
     <% user.songs.each do |song| %>
       <%= link_to song.name, song %><h5> by <%= song.user.name %></h5><br>
-      <div class="tinyblob"><%= link_to "Delete", song_path(song), method: :delete %></div><br>
+      <div class="tinyblob admin"><%= link_to "Delete", song_path(song), method: :delete %></div><br>
     <% end %>
 
   </div>
@@ -19,7 +19,7 @@
 
     <% user.samples.each do |sample| %>
       <%= link_to sample.name, sample %><h5> by <%= sample.user.name %></h5><br>
-      <div class="tinyblob"><%= link_to "Delete", sample_path(sample), method: :delete %></div><br>
+      <div class="tinyblob admin"><%= link_to "Delete", sample_path(sample), method: :delete %></div><br>
 
     <% end %>
   </div>
@@ -27,21 +27,28 @@
   <div class="cellblob1">
     <h2>Comments</h2>
 
-
     <% user.comments.each do |comment| %>
       <%= comment.body %><h5> by <%= comment.user.name %></h5><br>
+
+      <div class="tinyblob admin">
+        <% if comment.topic? %>
+          <%= link_to "Delete", topic_comment_path(comment.topic, comment), method: :delete %>
+        <% else %>
+          <%= link_to "Delete", sample_comment_path(comment.topic, comment), method: :delete %>
+        <% end %>
+
+      </div><br>
     <% end %>
   </div>
 
   <div class="cellblob2">
     <h2>News</h2>
 
-
-    <% user.comments.each do |comment| %>
-      <%= comment.body %><h5> by <%= comment.user.name %></h5><br>
+    <% @news.each do |topic| %>
+      <%= topic.name %><h5> by <%= topic.user.name %></h5><br>
+      <div class="tinyblob admin"><%= link_to "Delete", topic_path(topic), method: :delete %></div><br>
     <% end %>
   </div>
-
 
 <div class="cellblob1">
 
@@ -62,6 +69,7 @@
           <%= form_for @topic do |f| %>
             <%= f.label :name, "News:" %>
             <%= f.text_field :name, autofocus: true %>
+            <%= f.hidden_field :post_type, value: "news" %>
 
             <%= f.submit "Submit" %>
 

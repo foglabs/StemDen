@@ -147,6 +147,7 @@ ul.samples {
 h6 {
   display: inline;
   font-size: 7px;
+  height: 5px;
 }
 
 .timestampback {
@@ -190,6 +191,11 @@ h6 {
   font-size: 8px;
   padding: 0.08%;
   background-color: #FF0000;
+}
+
+.admin a {
+  float: right;
+
 }
 
 /* overall layout stuff */

@@ -1,5 +1,4 @@
 
-
 <div class="cellblob1">
 
   <div class="blob">
@@ -47,10 +46,11 @@
 
   <% @topics.each do |topic| %>
     <div class="blob">
-      <div class="nameblob"><%= link_to topic.name, topic %> </div>
+      <div class="nameblob"><%= link_to topic.name, topic %> <h6>by <%= link_to topic.user.name, topic.user %></h6>
+      </div>
 
       <span class="indexblob">
-        <h6>by <%= link_to topic.user.name, topic.user %> -- Alive At:
+        <h6>Alive At:
           <% if topic.comments.first %>
             <%= topic.comments.last.created_at.to_s(:short) %></h6>
           <% else %>
@@ -59,7 +59,7 @@
       </span>
 
       <div class="timestampback"></div>
-      <div class="disctimestamp"><h6>ooo Created: <%= topic.created_at.to_s(:short) %> ooo</h6></div>
+      <div class="disctimestamp"><h6>[ Created: <%= topic.created_at.to_s(:short) %> ]</h6></div>
     </div>
     <br>
     <br>

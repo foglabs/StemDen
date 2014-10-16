@@ -14,9 +14,9 @@
   <body>
     <nav>
 
-    <div class="blob">
-      <div class="nameblob"><h1><%= link_to ":: Stemden ::", samples_path %></h1></div>
-    </div>
+      <div class="blob">
+        <div class="nameblob"><h1><%= link_to ":: Stemden ::", samples_path %></h1></div>
+      </div>
       <div class="blobborder">
         <div class="blob navlink"><%= link_to "Add Stem", new_sample_path %></div>
       </div>
@@ -46,6 +46,11 @@
         </div>
         <div class="blobborder">
           <div class="blob navlink"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div>
+        </div>
+      <% end %>
+      <% if current_user && current_user.admin? %>
+        <div class="blobborder">
+          <div class="blob navlink"><%= link_to "Admin Dashboard", "/users/#{current_user.id}/dashboard" %></div>
         </div>
       <% end %>
     </nav>

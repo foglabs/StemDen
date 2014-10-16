@@ -15,6 +15,10 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
     @topic.user = current_user
 
+    if params[:topic][:post_type]
+      @topic.post_type = params[:topic][:post_type]
+    end
+
     if @topic.save
       redirect_to topic_path(@topic), notice: "Your topic has been accepted."
     else

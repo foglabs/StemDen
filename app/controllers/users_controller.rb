@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def dashboard
     @users = User.all
     @news = Topic.get_news
+    @topic = Topic.new
   end
 
 end

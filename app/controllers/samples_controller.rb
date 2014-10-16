@@ -1,6 +1,6 @@
 class SamplesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
-  before_filter :authorize_user!, except: [:index, :new, :show, :create]
+  before_filter :authorize_user, except: [:index, :new, :show, :create]
 
   def index
     @samples = Sample.all
@@ -44,8 +44,12 @@ class SamplesController < ApplicationController
     end
 
     def authorize_user
-      unless user_signed_in? && current_user.admin?
-        raise ActionController::RoutingError.new("Not Found")
+      @sample = Sample.find(params[:id])
+
+      unless current_user == @sample.user
+        unless user_signed_in? && current_user.admin?
+          raise ActionController::RoutingError.new("Not Found")
+        end
       end
     end
 end
