@@ -23,13 +23,26 @@ class Song < ActiveRecord::Base
 
     songname = songinfo.pop
     filenames_string = ""
+    counter = 0
 
     songinfo.each do |url|
       # download the boy to the local folder
-      `s3cmd get s3://stemden/audio/#{url}`
+      `s3cmd get s3://stemden/audio/#{url} #{counter+url}`
 
-      # strip filenames for sox command
-      filenames_string += url[0].match(/\/(.*\z)/)[1] + " "
+      filename_noex = url[0].match(/\/(.*)\.{1}/)[1]
+      filename_ex = url[0].match(/\/(.*\z)/)[1]
+
+      if filename_ex.end_with?("mp3")
+        `sox -t mp3 -c 1 #{filename_ex} -t wav #{filename_noex}.wav`
+
+        # without extension
+        filenames_string += counter.to_s + filename_noex + ".wav "
+      else
+        #with extension
+        filenames_string += counter.to_s + filename_ex + " "
+      end
+
+      counter += 1
     end
 
     `sox -m #{filenames_string}#{songname}.wav`
@@ -38,8 +51,6 @@ class Song < ActiveRecord::Base
 
 # this won't work V
     # Sample.create!(name: songname, specimen: "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav")
-
-
   end
 
 end
