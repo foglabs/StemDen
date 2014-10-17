@@ -20,6 +20,7 @@ class SpecimenUploader < CarrierWave::Uploader::Base
   end
 
 
+
   # encoding: utf-8
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

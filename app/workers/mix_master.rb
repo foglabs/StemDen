@@ -1,8 +1,7 @@
 class MixMaster
   include Sidekiq::Worker
 
-  def perform
+  def perform(songinfo)
+    Song.mix(songinfo)
   end
-
-
 end

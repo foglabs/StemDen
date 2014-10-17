@@ -32,6 +32,24 @@ class SongsController < ApplicationController
     redirect_to samples_path
   end
 
+  def makemix
+    @song = Song.find(params[:id])
+
+    #get em
+    urls = @song.get_urls
+
+    #send worker urls
+    MixMaster.perform_async(urls)
+
+    redirect_to song_path(@song)
+
+# screencast fakeout
+    # fake = Sample.first.specimen
+    # Sample.create(name: "#{@song.name}MIX", specimen: fake, category: "big band", user_id: 1 )
+
+    # redirect_to samples_path
+  end
+
   private
     def song_params
       params.require(:song).permit(:name, :user_id)

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :users do
     collection do
-      get '/dashboard' => 'users#dashboard'
+      get :dashboard
     end
   end
 
@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     resources :comments, only: [:new, :create, :destroy]
   end
 
-  resources :songs
+  resources :songs do
+    collection do
+      post :makemix
+    end
+  end
 
   resources :song_samples, only: [:create]
 
