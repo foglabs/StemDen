@@ -27,19 +27,26 @@ class Song < ActiveRecord::Base
 
     songinfo.each do |url|
       # download the boy to the local folder
-      `s3cmd get s3://stemden/audio/#{url} #{counter+url}`
 
       filename_noex = url[0].match(/\/(.*)\.{1}/)[1]
       filename_ex = url[0].match(/\/(.*\z)/)[1]
 
+      `s3cmd get s3://stemden/audio/#{url[0]} ./process/#{filename_ex}`
+
+      # addcountertofilename for file uniqueness
+      `mv ./process/#{filename_ex} ./process/#{counter.to_s + filename_ex}`
+      filename_noex = counter.to_s + filename_noex
+      filename_ex = counter.to_s + filename_ex
+
+
       if filename_ex.end_with?("mp3")
-        `sox -t mp3 -c 1 #{filename_ex} -t wav #{filename_noex}.wav`
+        `sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
 
         # without extension
-        filenames_string += counter.to_s + filename_noex + ".wav "
+        filenames_string += "./process/" + filename_noex + ".wav "
       else
         #with extension
-        filenames_string += counter.to_s + filename_ex + " "
+        filenames_string += "./process/" + filename_ex + " "
       end
 
       counter += 1
@@ -48,6 +55,7 @@ class Song < ActiveRecord::Base
     `sox -m #{filenames_string}#{songname}.wav`
 
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
+    `rm -rf ./process/*`
 
 # this won't work V
     # Sample.create!(name: songname, specimen: "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav")
