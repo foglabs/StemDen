@@ -38,7 +38,6 @@ class Song < ActiveRecord::Base
       filename_noex = counter.to_s + filename_noex
       filename_ex = counter.to_s + filename_ex
 
-
       if filename_ex.end_with?("mp3")
         `sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
 
