@@ -8,6 +8,7 @@ gem 'fog'
 gem 'puma'
 gem 'redis'
 gem 'sidekiq'
+gem 'foreman'
 
 gem 'rails', '4.1.6'
 gem 'pg'
