@@ -13,6 +13,7 @@ class Song < ActiveRecord::Base
       urls << [samp.specimen.url.gsub(/\A(\w|\W)*audio\//, "")]
     end
 
+    urls << user.id
     urls << name
 
     urls
@@ -20,8 +21,10 @@ class Song < ActiveRecord::Base
 
   def self.mix(songinfo)
     #last value of songinfo array is output name!
+    # second to last is user id of song
 
     songname = songinfo.pop
+    userid = songinfo.pop
     filenames_string = ""
     counter = 0
 
@@ -55,6 +58,13 @@ class Song < ActiveRecord::Base
 
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
     `rm -rf ./process/*`
+
+    song = Sample.new
+    song.name = songname
+    song.remote_(specimen)_url = "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav"
+    song.category = mixes
+    song.user = userid
+    song.save
 
 # this won't work V
     # Sample.create!(name: songname, specimen: "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav")
