@@ -59,12 +59,12 @@ class Song < ActiveRecord::Base
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
     `rm -rf ./process/*`
 
-    song = Sample.new
-    song.name = songname
-    song.remote_(specimen)_url = "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav"
-    song.category = mixes
-    song.user = userid
-    song.save
+    sample = Sample.new
+    sample.name = songname
+    sample.remote_specimen_url = "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav"
+    sample.category = mixes
+    sample.user = userid
+    sample.save
 
 # this won't work V
     # Sample.create!(name: songname, specimen: "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav")
