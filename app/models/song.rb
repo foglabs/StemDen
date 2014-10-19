@@ -61,15 +61,12 @@ class Song < ActiveRecord::Base
 
     sample = Sample.new
     sample.name = songname
-    sample.remote_specimen_url = "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav"
+    sample.remote_specimen_url = "https://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"
     sample.category = mixes
     sample.user = userid
     sample.save
 
-# this won't work V
-    # Sample.create!(name: songname, specimen: "https://stemden.s3.amazonaws.com/audio/mixes/#{songname}.wav")
   end
-
 end
 
 

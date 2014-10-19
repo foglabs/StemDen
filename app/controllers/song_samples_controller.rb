@@ -13,6 +13,13 @@ class SongSamplesController < ApplicationController
     end
   end
 
+  def destroy
+    @song_sample = SongSample.find(params[:id])
+
+    @song_sample.destroy
+    redirect_to song_path(@song_sample.song)
+  end
+
   private
     def song_sample_params
       params.require(:song_sample).permit(:sample_id, :song_id, :user_id)

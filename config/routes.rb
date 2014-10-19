@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :song_samples, only: [:create]
+  resources :song_samples, only: [:create, :destroy]
 
   root to: "samples#index"
 end

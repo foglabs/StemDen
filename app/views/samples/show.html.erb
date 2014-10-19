@@ -34,7 +34,6 @@
           <%= @sample.name %>.stop();
         });
 
-
       $(".timelinecontainer").click(function(e){
         //set song position to % position within timelinediv
           <%= @sample.name %>.setPosition((e.pageX - $(".timelinecontainer").offset().left)/($(".timelinecontainer").width()) * <%= @sample.name %>.duration);
