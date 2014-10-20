@@ -3,7 +3,6 @@ class SamplesController < ApplicationController
   before_filter :authorize_user, except: [:index, :new, :show, :create]
 
   def index
-    # MixMaster.perform_async('bob', 5)
     @samples = Sample.all
     @topics = Topic.all
     @news = Topic.get_news

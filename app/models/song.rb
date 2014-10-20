@@ -59,13 +59,13 @@ class Song < ActiveRecord::Base
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
     `rm -rf ./process/*`
 
-    sample = Sample.new
-    sample.name = songname
-    sample.remote_specimen_url = "https://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"
-    sample.category = mixes
-    sample.user = userid
-    sample.save
+    sampinfo = []
+    sampinfo << songname
+    sampinfo << "mixes"
+    sampinfo << userid
+    sampinfo << "https://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"
 
+    MakeSample.perform_async(sampinfo)
   end
 end
 

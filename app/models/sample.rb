@@ -10,4 +10,12 @@ class Sample < ActiveRecord::Base
   validates :user, presence: true
 
   mount_uploader :specimen, SpecimenUploader
+
+  def self.makesample(sampinfo)
+
+    @sample = Sample.create!(name: sampinfo[0], category: sampinfo[1], user_id: sampinfo[2], specimen: [3])
+
+  end
+
+
 end
