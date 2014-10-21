@@ -63,9 +63,9 @@ class Song < ActiveRecord::Base
     sampinfo << songname
     sampinfo << "mixes"
     sampinfo << userid
-    sampinfo << "https://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"
+    sampinfo << "http://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"
 
-    MakeSample.perform_async(sampinfo)
+    SampleMaker.perform_async(sampinfo)
   end
 end
 

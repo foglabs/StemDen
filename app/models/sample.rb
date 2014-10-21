@@ -12,9 +12,13 @@ class Sample < ActiveRecord::Base
   mount_uploader :specimen, SpecimenUploader
 
   def self.makesample(sampinfo)
+    sample = Sample.new
+    sample.user = User.find(sampinfo[2])
+    sample.name = sampinfo[0]
+    sample.remote_specimen_url = sampinfo[3]
+    sample.category = sampinfo[1]
 
-    @sample = Sample.create!(name: sampinfo[0], category: sampinfo[1], user_id: sampinfo[2], specimen: [3])
-
+    sample.save
   end
 
 

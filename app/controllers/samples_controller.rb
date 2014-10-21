@@ -40,7 +40,7 @@ class SamplesController < ApplicationController
 
   private
     def sample_params
-      params.require(:sample).permit(:name, :length, :category, :description, :specimen)
+      params.require(:sample).permit(:name, :length, :category, :description, :specimen, :remote_specimen_url)
     end
 
     def authorize_user
