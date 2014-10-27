@@ -22,6 +22,6 @@ class SongSamplesController < ApplicationController
 
   private
     def song_sample_params
-      params.require(:song_sample).permit(:sample_id, :song_id, :user_id)
+      params.require(:song_sample).permit(:sample_id, :song_id, :user_id, :gain)
     end
 end

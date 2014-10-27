@@ -11,10 +11,12 @@
     </div>
   <% end %>
 
-  <%= f.label :sample_id, 'Sample' %>
+  <%= f.label :sample_id, "Sample" %>
   <%= f.collection_select :sample_id, Sample.all, :id, :name, include_blank: true %>
+  <%= f.label :gain, "Gain" %>
+  <%= f.text_field :gain, autofocus: true %>
 
   <%= f.hidden_field :song_id, value: song.id %>
 
-  <%= f.submit 'Add Sample' %>
+  <%= f.submit "Add Sample" %>
 <% end %>
