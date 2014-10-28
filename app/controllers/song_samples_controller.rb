@@ -1,6 +1,10 @@
 class SongSamplesController < ApplicationController
+
   def create
     @song_sample = SongSample.new(song_sample_params)
+
+    # convert from dB to factor for sox
+    @song_sample.gain = 1*10**(@song_sample.gain/20)
     @song_sample.user = current_user
 
     if @song_sample.save

@@ -8,9 +8,13 @@ class Song < ActiveRecord::Base
 
   def get_urls
     urls = []
-    samples.each do |samp|
-      #gives url as username/filename.ext
-      urls << [samp.specimen.url.gsub(/\A(\w|\W)*audio\//, "")]
+    # samples.each do |samp|
+    #   #gives url as username/filename.ext
+    #   urls << [samp.specimen.url.gsub(/\A(\w|\W)*audio\//, "")]
+    # end
+
+    song_samples.each do |songsamp|
+      urls << [songsamp.sample.specimen.url.gsub(/\A(\w|\W)*audio\//, ""), songsamp.gain]
     end
 
     urls << user.id
@@ -45,7 +49,7 @@ class Song < ActiveRecord::Base
         `sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
 
         # without extension
-        filenames_string += "./process/" + filename_noex + ".wav "
+        filenames_string += "-v #{url[1]} ./process/" + filename_noex + ".wav "
       else
         #with extension
         filenames_string += "./process/" + filename_ex + " "
