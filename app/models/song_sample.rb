@@ -9,7 +9,8 @@ class SongSample < ActiveRecord::Base
 
   def convert_gain
     if gain
-      20*(Math.log10(gain/1)).to_s
+      converted = 20*(Math.log10(gain/1))
+      sprintf('%.3f', converted)
     else
       "0"
     end
