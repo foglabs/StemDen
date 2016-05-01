@@ -7,18 +7,15 @@ class Song < ActiveRecord::Base
   validates :user, presence: true
 
   def get_urls
-    urls = []
+    urls = {samps: [], userid: user.id, username: name, songid: id}
     # samples.each do |samp|
     #   #gives url as username/filename.ext
     #   urls << [samp.specimen.url.gsub(/\A(\w|\W)*audio\//, "")]
     # end
 
     song_samples.each do |songsamp|
-      urls << [songsamp.sample.specimen.url.gsub(/\A(\w|\W)*audio\//, ""), songsamp.gain]
+      urls[:samps] << {link: songsamp.sample.specimen.url.gsub(/\A(\w|\W)*audio\//, ""), gain: songsamp.gain}
     end
-
-    urls << user.id
-    urls << name
 
     urls
   end
@@ -27,8 +24,10 @@ class Song < ActiveRecord::Base
     #last value of songinfo array is output name!
     # second to last is user id of song
 
-    songname = songinfo.pop
-    userid = songinfo.pop
+    songo = Song.find(songinfo['songid'])
+    songname = songo.name
+    userid = songinfo['userid']
+
     filenames_string = ""
     counter = 0
 
@@ -63,13 +62,9 @@ class Song < ActiveRecord::Base
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
     `rm -rf ./process/*`
 
-    sampinfo = []
-    sampinfo << songname
-    sampinfo << "mixes"
-    sampinfo << userid
-    sampinfo << "http://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"
+    sampinfo = {name: songname, category: 'mixes', userid: userid, url: "http://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"}
 
-    SampleMaker.perform_async(sampinfo)
+    SampleMaker.perform_async(sampinfo: sampinfo)
   end
 end
 

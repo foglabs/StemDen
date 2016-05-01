@@ -13,8 +13,10 @@ class SongsController < ApplicationController
     @song.user = current_user
 
     if @song.save
+
       redirect_to song_path(@song), notice: "Your song has been accepted."
     else
+      
       flash[:notice] = "Your song could not be accepted!"
       render 'new'
     end
@@ -39,15 +41,9 @@ class SongsController < ApplicationController
     urls = @song.get_urls
 
     #send worker urls
-    MixMaster.perform_async(urls)
+    MixMaster.perform_async(songinfo: urls)
 
     redirect_to song_path(@song)
-
-# screencast fakeout
-    # fake = Sample.first.specimen
-    # Sample.create(name: "#{@song.name}MIX", specimen: fake, category: "big band", user_id: 1 )
-
-    # redirect_to samples_path
   end
 
   private

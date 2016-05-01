@@ -19,8 +19,6 @@ class SpecimenUploader < CarrierWave::Uploader::Base
     "#{model.name}.#{model.specimen.file.extension}" if original_filename
   end
 
-
-
   # encoding: utf-8
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

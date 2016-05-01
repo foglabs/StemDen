@@ -7,7 +7,7 @@ gem 'carrierwave'
 gem 'fog'
 gem 'puma'
 gem 'redis'
-gem 'sidekiq'
+gem 'shoryuken'
 gem 'foreman'
 
 gem 'rails', '4.1.6'

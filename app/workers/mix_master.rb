@@ -1,7 +1,9 @@
 class MixMaster
-  include Sidekiq::Worker
+  include Shoryuken::Worker
+  shoryuken_options queue: 'default', auto_delete: true, body_parser: :json
 
-  def perform(songinfo)
-    Song.mix(songinfo)
+  def perform(sqsmsg, data)
+
+    Song.mix(data['songinfo'])
   end
 end
