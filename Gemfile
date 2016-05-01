@@ -10,6 +10,7 @@ gem 'redis'
 gem 'shoryuken'
 gem 'foreman'
 
+gem 'json', '> 1.8.1'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
