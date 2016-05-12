@@ -1,0 +1,127 @@
+<div class="blob">
+  <div class="nameblob">
+    <h1><%= @user.name %> :: Profile</h1>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="cellblob1">
+
+  <div class="blob">
+    <div class="nameblob">
+      <h2>All Stems</h2>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="blobborder">
+    <div class="blob">
+        <% @user.samples.each do |samp| %>
+          <%= link_to samp.name, samp %> -- <h6><%= samp.created_at.to_s(:short) %></h6><br>
+        <% end %>
+    </div>
+  </div>
+  <br>
+  <br>
+
+</div>
+
+<div class="cellblob2">
+
+  <div class="blob">
+    <div class="nameblob">
+      <h2>All Songs</h2>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="blobborder">
+    <div class="blob">
+        <% @user.songs.each do |song| %>
+          <%= link_to song.name, song %> -- <h6><%= song.created_at.to_s(:short) %></h6><br>
+        <% end %>
+    </div>
+  </div>
+
+</div>
+
+<br>
+<br>
+
+<div class="cellblob1">
+
+  <div class="blob">
+    <div class="nameblob">
+      <h2>All Comments</h2>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="blobborder">
+    <div class="blob">
+        <% @user.comments.order(:created_at).each do |comm| %>
+          <div class="nameblob">
+            <% if comm.topic? %>
+              <%= comm.body %> on: <div class="commborder2"><%= link_to comm.topic.name, comm.topic %></div>
+            <% else %>
+              <%= comm.body %> on: <div class="yellowblobborder"><%= link_to comm.sample.name, comm.sample %></div>
+            <% end %>
+          </div> -- <h6><%= comm.created_at.to_s(:short) %></h6><br>
+        <% end %>
+    </div>
+  </div>
+<br>
+<br>
+
+</div>
+
+<div class="cellblob2">
+
+  <% if current_user && current_user.admin? %>
+
+    <div class="blob">
+      <div class="nameblob">
+        <h2>Post News</h2>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="blobborder">
+      <div class="blob">
+        <div class="commform">
+          <%= form_for @topic do |f| %>
+            <%= f.label :name, "News:" %>
+            <%= f.text_field :name, autofocus: true %>
+
+            <%= f.submit "Submit" %>
+
+            <% if @topic.errors.full_messages.any? %>
+              <% @topic.errors.full_messages.each do |err| %>
+                <%= err %>
+                <br>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<br>
+<br>
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>

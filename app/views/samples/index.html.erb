@@ -1,0 +1,74 @@
+<div class="cellblob1">
+
+  <div class="blob">
+    <div class="nameblob"><h2>: All Samples :</h2>
+      <div class="timestampback">
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <br>
+
+  <% @samples.each do |samp| %>
+    <div class="blobborder">
+      <div class="blob">
+        <div class="nameblob"><%= link_to samp.user.name, samp.user %></div> --
+
+          <%= link_to samp do %>
+            <span class="indexblob">
+             <%= samp.name %>
+            </span>
+          <% end %>
+          <br>
+          <div class="timestampback"><h5>[<%= samp.created_at.to_s(:short) %>] -- [<%= samp.category %>]</h5></div>
+      </div>
+    </div>
+    <br>
+    <br>
+
+  <% end %>
+</div>
+
+<div class="cellblob2">
+
+  <div class="blob">
+    <div class="nameblob">
+      <h2>: Discussion :</h2>
+      <div class="timestampback">
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <% @topics.each do |topic| %>
+    <div class="blob">
+      <div class="nameblob"><%= link_to topic.name, topic %> <h6>by <%= link_to topic.user.name, topic.user %></h6>
+      </div>
+
+      <span class="indexblob">
+        <h6>Alive At:
+          <% if topic.comments.first %>
+            <%= topic.comments.last.created_at.to_s(:short) %></h6>
+          <% else %>
+            FRESH</h6>
+          <% end %>
+      </span>
+
+      <div class="timestampback"></div>
+      <div class="disctimestamp"><h6>[ Created: <%= topic.created_at.to_s(:short) %> ]</h6></div>
+    </div>
+    <br>
+    <br>
+  <% end %>
+
+  <div class="blob">
+    <%= link_to "Add A Topic", new_topic_path %>
+  </div>
+
+</div>
+
+<br>
+<br>

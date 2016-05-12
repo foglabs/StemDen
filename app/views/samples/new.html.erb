@@ -1,0 +1,81 @@
+<div class="blob">
+  <div class="nameblob"><h1>Stemden :: Add A Sample</h1></div>
+</div>
+<br>
+<br>
+
+<% if current_user %>
+
+<div class="blob">
+  <div class="nameblob">
+    <h6>(.wav, .mp3, .mp4, .ogg, etc.) -- (.aiff not supported)</h6>
+  </div>
+</div>
+
+  <%= form_for @sample, html: {multipart: true} do |f| %>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :name, "Name" %>
+        <%= f.text_field :name, autofocus: true %><br>
+      </div>
+    </div>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :category, "Category" %>
+        <%= f.text_field :category %><br>
+    </div>
+  </div>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :description, "Description" %>
+        <%= f.text_field :description %><br>
+    </div>
+  </div>
+
+  <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :length, "Length" %>
+        <%= f.text_field :length %><br>
+    </div>
+  </div>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.label :specimen, "Add File" %>
+        <%= f.file_field :specimen %>
+    </div>
+  </div>
+
+    <div class="blobborderline">
+      <div class="blob">
+        <%= f.submit "Submit" %>
+      </div>
+    </div>
+
+
+    <div class="blobborderline">
+      <div class="blob">
+        <% if @sample.errors.full_messages.any? %>
+          <% @sample.errors.full_messages.each do |err| %>
+            <%= err %>
+            <br>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  <% end %>
+<% end %>
+
+<br>
+
+<div class="blobborderline">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>
+
+<br>

@@ -1,0 +1,149 @@
+<script type="text/javascript">
+
+  //initialize player + set up controls
+
+  soundManager.setup({
+  url: '/swf',
+  onready: function() {
+
+    var <%= @sample.name %> = soundManager.createSound({
+      id: '<%= @sample.name %>id',
+      url: '<%= @sample.specimen_url %>',
+
+      ontimeout: function() {
+        // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+        console.log('Soundmanager was unable to start! Fuck!');
+      },
+
+      whileplaying: function() {
+        $(".timeline").css('width', ((<%= @sample.name %>.position/<%= @sample.name %>.duration) * 100) + '%');
+      },
+
+      onstop: function() {
+        $(".timeline").css('width', '0%');
+      }
+    });
+
+      $("#<%= @sample.name %>playbutton").click(function()
+        {
+          <%= @sample.name %>.play();
+        });
+
+      $("#<%= @sample.name %>stopbutton").click(function()
+        {
+          <%= @sample.name %>.stop();
+        });
+
+      $(".timelinecontainer").click(function(e){
+        //set song position to % position within timelinediv
+          <%= @sample.name %>.setPosition((e.pageX - $(".timelinecontainer").offset().left)/($(".timelinecontainer").width()) * <%= @sample.name %>.duration);
+          console.log(e.pageX);
+      });
+    },
+  });
+</script>
+
+<div class="blob">
+  <div class="nameblob"><h1><%= @sample.name %></h1></div>
+</div>
+
+<br>
+<br>
+
+<div class="yellowblobborder">
+  <a class="blob" href="<%= @sample.specimen_url %>">Download<br>Stem</a>
+</div>
+
+<% if @sample.user == current_user %>
+  <div class="yellowblobborder">
+
+    <div class="blob"><%= link_to "Delete Stem", sample_path(@sample), method: :delete %></div>
+  </div>
+
+<% end %>
+
+<br>
+<br>
+
+<div class="playcontrolcontainer">
+  <div class="playcontrols">
+    <button id="<%= @sample.name %>playbutton"><img src="/img/play.png" alt="Play"></button>
+    <button id="<%= @sample.name %>stopbutton"><img src="/img/stop.png" alt="Stop"></button>
+  </div>
+</div>
+
+<div class="tcwrapper">
+  <div class="timelinecontainer">
+    <div class="timeline"></div>
+  </div>
+</div>
+
+<br>
+<br>
+
+<% lastuser = "" %>
+<% counter = 0 %>
+
+<% @sample.comments.each do |comm| %>
+  <% if comm.user.name != lastuser && lastuser != ""  %>
+    <br>
+    <br>
+    <% counter += 1 %>
+  <% end %>
+
+  <% if counter % 2 == 0 %>
+    <div class="yellowblobborder">
+  <% else %>
+    <div class="commborder2">
+  <% end %>
+      <div class="blob">
+          <div class="nameblob"><%= comm.user.name %></div><br>
+          <%= comm.body %><br>
+          <div class="timestampback"><h6><%= comm.created_at.to_s(:short) %></h6>
+
+            <% if comm.user == current_user %>
+              <div class="tinyblob"><%= link_to "Delete", sample_comment_path(@sample, comm), method: :delete %></div>
+            <% end %>
+
+          </div>
+      </div>
+      <br>
+    </div>
+
+
+
+  <% lastuser = comm.user.name %>
+<% end %>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <div class="commform">
+    <%= form_for [@sample, @comment] do |f| %>
+      <%= f.label :body, "Comment:" %>
+      <%= f.text_field :body, autofocus: true %>
+
+      <%= f.submit "Submit" %>
+
+      <% if @comment.errors.full_messages.any? %>
+        <% @comment.errors.full_messages.each do |err| %>
+          <%= err %>
+          <br>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", samples_path %>
+  </div>
+</div>
+
+<br>
+<br>

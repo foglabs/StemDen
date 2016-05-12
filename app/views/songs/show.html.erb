@@ -1,0 +1,50 @@
+<div class="blob">
+  <div class="nameblob">
+
+    <h1>Song :: <span class="indexblob"><%= @song.name %></span></h1>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="blobborder">
+  <div class="blob">
+    <ul class="samples">
+      <% @song.song_samples.each do |song_sample| %>
+        <div class="nameblob">
+          <li>
+            <%= link_to "#{song_sample.sample.name}", song_sample.sample %> -- <%= song_sample.convert_gain %> dB -- <%= link_to "#{song_sample.sample.user.name}", song_sample.sample.user %><h5> -- Added By <%= link_to song_sample.user.name, song_sample.user %></h5></li>
+            <% if song_sample.user == current_user %>
+              <div class="tinyblob"><%= link_to "Delete", song_sample_path(song_sample), method: :delete %></div>
+            <% end %>
+        </div><br>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <div class="nameblob"><h3>Add a Stem</h3></div>
+    <%= render partial: 'song_samples/form', locals: { song: @song } %>
+  </div>
+</div>
+
+<br>
+<br>
+
+<%= button_to "Mix", {controller: :songs, action: :makemix, id: @song.id}, method: :post %>
+
+<br>
+<br>
+
+<div class="blobborder">
+  <div class="blob">
+    <%= link_to "Go Back", songs_path %>
+  </div>
+</div>
+<br>
+<br>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stemden</title>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+
+  <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'>
+
+  <%= csrf_meta_tags %>
+
+</head>
+  <body>
+    <nav>
+
+      <div class="blob">
+        <div class="nameblob"><h1><%= link_to ":: Stemden ::", samples_path %></h1></div>
+      </div>
+      <div class="blobborder">
+        <div class="blob navlink"><%= link_to "Add Stem", new_sample_path %></div>
+      </div>
+
+      <div class="blobborder">
+        <div class="blob navlink"><%= link_to "Create Song", new_song_path %></div>
+      </div>
+
+      <div class="blobborder">
+        <div class="blob navlink"><%= link_to "All Songs", songs_path %></div>
+      </div>
+
+      <% if user_signed_in? %>
+        <div class="blobborder">
+          <div class="blob navlink">Logged in as <strong><%= current_user.name %></strong>.</div>
+        </div>
+        <div class="blobborder">
+          <div class="blob navlink"><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></div>
+        </div>
+        <div class="blobborder">
+          <div class="blob navlink"><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></div>
+        </div>
+
+      <% else %>
+        <div class="blobborder">
+          <div class="blob navlink"><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></div>
+        </div>
+        <div class="blobborder">
+          <div class="blob navlink"><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></div>
+        </div>
+      <% end %>
+      <% if current_user && current_user.admin? %>
+        <div class="blobborder">
+          <div class="blob navlink"><%= link_to "Admin Dashboard", dashboard_users_path %></div>
+        </div>
+      <% end %>
+    </nav>
+
+    <div class="bigblob">
+      <div class="inblob">
+
+        <%= yield %>
+
+        <% if notice %>
+          <div class="blobborder">
+            <div class="blob">
+                <%= notice %>
+            </div>
+          </div>
+          <br>
+        <% end %>
+
+        <% if alert %>
+          <div class="blobborder">
+            <div class="blob">
+              <%= alert %>
+            </div>
+          </div>
+          <br>
+        <% end %>
+
+      </div>
+    </div>
+
+    <div class="updatecontainer">
+
+      <div class="update">
+        <div class="nameblob"><h2>: Announcements :</h2>
+
+          <ul>
+            <% Topic.get_news.each do |item| %>
+              <li><%= link_to item.name, item %></li>
+            <% end %>
+          </ul>
+
+          <div class="timestampback">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
