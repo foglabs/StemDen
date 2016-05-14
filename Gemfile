@@ -7,7 +7,7 @@ gem 'carrierwave'
 gem 'fog'
 gem 'puma'
 # gem 'redis'
-# gem 'shoryuken'
+gem 'shoryuken'
 # gem 'foreman'
 
 gem 'json', '> 1.8.1'
