@@ -9,7 +9,7 @@ if ENV['DEBUG_REQUIRE']
     end
     if ENV['DEBUG_REQUIRE'].to_f < ts.total
       total = ts.format("%t require #{file}")
-      from_start = (Time.now - @@first).to_i
+      from_start = (Time.now - @first).to_i
       $stdout.puts "#{total} (#{from_start} second(s) from start)"
     end
     rc
