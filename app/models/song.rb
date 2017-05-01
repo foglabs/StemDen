@@ -30,13 +30,13 @@ class Song < ActiveRecord::Base
     filenames_string = ""
     counter = 0
 
-    songinfo.each do |url|
+    songinfo['samps'].each do |hash|
       # download the boy to the local folder
 
-      filename_noex = url[0].match(/\/(.*)\.{1}/)[1]
-      filename_ex = url[0].match(/\/(.*\z)/)[1]
+      filename_noex = hash['link'].match(/\/(.*)\.{1}/)[1]
+      filename_ex = hash['link'].match(/\/(.*\z)/)[1]
 
-      `s3cmd get s3://stemden/audio/#{url[0]} ./process/#{filename_ex}`
+      `s3cmd get s3://stemden/audio/#{hash['link']} ./process/#{filename_ex}`
 
       # addcountertofilename for file uniqueness
       `mv ./process/#{filename_ex} ./process/#{counter.to_s + filename_ex}`
@@ -47,7 +47,7 @@ class Song < ActiveRecord::Base
         `/usr/sox-14.4.2/bin/sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
 
         # without extension
-        filenames_string += "-v #{url[1]} ./process/" + filename_noex + ".wav "
+        filenames_string += "-v #{hash['gain']} ./process/" + filename_noex + ".wav "
       else
         #with extension
         filenames_string += "./process/" + filename_ex + " "
