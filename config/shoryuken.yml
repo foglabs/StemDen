@@ -1,6 +1,6 @@
 aws:
-  aws_access_key_id: <%= ENV["SQS_ACCESS"] %>,
-  aws_secret_access_key: <%= ENV["SQS_SECRET"] %>,
+  access_key_id: <%= ENV["SQS_ACCESS"] %>,
+  secret_access_key: <%= ENV["SQS_SECRET"] %>,
 concurrency: 1
 queues:
   - [stemqueue, 1]
