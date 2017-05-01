@@ -45,7 +45,7 @@ class Song < ActiveRecord::Base
       filename_ex = counter.to_s + filename_ex
 
       if filename_ex.end_with?("mp3")
-        `sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
+        `/usr/sox-14.4.2/bin/sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
 
         # without extension
         filenames_string += "-v #{url[1]} ./process/" + filename_noex + ".wav "
@@ -57,7 +57,7 @@ class Song < ActiveRecord::Base
       counter += 1
     end
 
-    `sox -m #{filenames_string}#{songname}.wav`
+    `/usr/sox-14.4.2/bin/sox -m #{filenames_string}#{songname}.wav`
 
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
     `rm -rf ./process/*`
