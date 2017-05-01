@@ -40,6 +40,7 @@ class SongsController < ApplicationController
     #get em
     urls = @song.get_urls
     #send worker urls
+    
     MixMaster.perform_async(songinfo: urls)
 
     redirect_to song_path(@song)

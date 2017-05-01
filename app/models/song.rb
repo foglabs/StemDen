@@ -23,7 +23,6 @@ class Song < ActiveRecord::Base
   def self.mix(songinfo)
     #last value of songinfo array is output name!
     # second to last is user id of song
-
     songo = Song.find(songinfo['songid'])
     songname = songo.name
     userid = songinfo['userid']
