@@ -36,13 +36,7 @@ class SongsController < ApplicationController
 
   def makemix
     @song = Song.find(params[:id])
-
-    #get em
-    urls = @song.get_urls
-    #send worker urls
-    
-    MixMaster.perform_async(songinfo: urls)
-
+    MixMaster.perform_async({type: 'mix', songid: @song.id})
     redirect_to song_path(@song)
   end
 
