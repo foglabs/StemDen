@@ -12,7 +12,8 @@ class SpecimenUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(wav mp3 ogg aiff aac)
+    # %w(wav mp3 ogg aiff aac)
+    %w(wav ogg aiff aac)
   end
 
     def filename

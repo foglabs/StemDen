@@ -42,26 +42,28 @@ class Song < ActiveRecord::Base
       filename_noex = counter.to_s + filename_noex
       filename_ex = counter.to_s + filename_ex
 
-      if filename_ex.end_with?("mp3")
-        `/usr/sox-14.4.2/bin/sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
+      # if filename_ex.end_with?("mp3")
+      #   `/usr/sox-14.4.2/bin/sox -t mp3 ./process/#{filename_ex} -t wav ./process/#{filename_noex}.wav`
 
-        # without extension
-        filenames_string += "-v #{stemhash[:gain]} ./process/" + filename_noex + ".wav "
-      else
+      #   # without extension
+      #   filenames_string += "-v #{stemhash[:gain] || 0} ./process/" + filename_noex + ".wav "
+      # else
         #with extension
         filenames_string += "./process/" + filename_ex + " "
-      end
+      # end
 
       counter += 1
     end
 
+    # mix them shits
     `/usr/sox-14.4.2/bin/sox -m #{filenames_string}#{songname}.wav`
 
+    # upload them shits
     `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
     `rm -rf ./process/*`
 
     sampinfo = {name: songname, category: 'mixes', userid: userid, url: "http://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"}
     # SampleMaker.perform_async(sampinfo: sampinfo)
-    Sample.create(user: User.find(sampinfo[:userid]), name: sampinfo[:name], category: sampinfo[:category], remote_specimen_url: sampinfo[:url])
+    Sample.create(user_id: sampinfo[:userid], name: sampinfo[:name], category: sampinfo[:category], remote_specimen_url: sampinfo[:url])
   end
 end
