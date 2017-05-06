@@ -39,6 +39,27 @@ class Song < ActiveRecord::Base
     songo = Song.find(songid)
     songname = Song.scrub_fname(songo.name)
 
+    # check for existing filename
+    checknames = Sample.where("name LIKE ?", "%#{songname}%").all.to_a
+    last = checknames.sort_by! {|s| s.name[-1].to_i }.last
+
+    if last
+
+      logger.info "Found existing sample with #{songname}!"
+      iteration = last.name.match(/_\d\z/)
+
+      if iteration
+        logger.info "Iteration found"
+        songname = "#{songname}_#{(last.name[-1].to_i)+1}"
+      else
+        logger.info "none found"
+
+        songname = "#{songname}_2"
+      end
+
+      logger.info "Name will be #{songname}..."
+    end
+
     songinfo = songo.get_urls
     srate = songinfo[:srate]
     userid = songinfo[:userid]
@@ -50,35 +71,48 @@ class Song < ActiveRecord::Base
 
     files.each do |stemhash|
       # download the boy to the local folder
-
       stemhash[:filename_noex] = stemhash[:link].match(/\/(.*)\.{1}/)[1]
       stemhash[:filename_ex] = stemhash[:link].match(/\/(.*\z)/)[1]
-      `s3cmd get s3://stemden/audio/#{stemhash[:link]} ./process/#{filename_ex}`
-      stemhash[:srate] = `sox --i -r ./process/#{filename_ex}`
+      `s3cmd get s3://stemden/audio/#{stemhash[:link]} ./process/#{stemhash[:filename_ex]}`
+      stemhash[:srate] = `/usr/sox-14.4.2/bin/sox --i -r ./process/#{stemhash[:filename_ex]}`.try(:to_i)
 
       if stemhash[:srate] != srate
-        `sox ./process/#{stemhash[:filename_ex]} -r #{srate.to_i} ./process/rated-#{stemhash[:filename_ex]}`
-        stemhash[:filename_ex] = "rated-#{stemhash[:filename_ex]}"
+        `/usr/sox-14.4.2/bin/sox ./process/#{stemhash[:filename_ex]} -r #{srate.to_i} ./process/ready-#{stemhash[:filename_ex]}`
+      else        
+        `/usr/sox-14.4.2/bin/sox ./process/#{stemhash[:filename_ex]} ./process/ready-#{stemhash[:filename_ex]}`
       end
+
+      stemhash[:filename_ex] = "ready-#{stemhash[:filename_ex]}"
 
       `mv ./process/#{stemhash[:filename_ex]} ./process/#{counter.to_s + stemhash[:filename_ex]}`
       stemhash[:filename_ex] = "#{counter.to_s + stemhash[:filename_ex]}"
 
-      filenames_string += "-v #{stemhash[:gain] || 0} #{stemhash[:filename_ex]} "
+      logger.info "This sample right der #{stemhash.inspect}"
+
+      filenames_string += "-v #{stemhash[:gain] || 1} ./process/#{stemhash[:filename_ex]} "
       counter += 1
     end
 
     # mix them shits
-    soxstring = "-m #{filenames_string}#{songname}.wav"
+    soxstring = "-m #{filenames_string} ./process/#{songname}.wav"
     logger.info "Mixing #{soxstring}"
     `/usr/sox-14.4.2/bin/sox #{soxstring}`
 
     # upload them shits
-    `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
-    `rm -rf ./process/*`
+    # `s3cmd put -f --acl-public #{songname}.wav s3://stemden/audio/mixes/#{songname}.wav`
 
     sampinfo = {name: songname, category: 'mixes', userid: userid, url: "http://s3.amazonaws.com/stemden/audio/mixes/#{songname}.wav"}
-    # SampleMaker.perform_async(sampinfo: sampinfo)
-    Sample.create(user_id: sampinfo[:userid], name: sampinfo[:name], category: sampinfo[:category], remote_specimen_url: sampinfo[:url])
+    sample = Sample.new(user_id: sampinfo[:userid], name: sampinfo[:name], category: sampinfo[:category])
+
+    uploader = SpecimenUploader.new
+    File.open("./process/#{songname}.wav") do |file|
+      sample.specimen = file
+    end
+
+    
+    sample.save
+    `rm -rf ./process/*`
+    logger.info "Done with #{sample.id}"
+    sample
   end
 end
